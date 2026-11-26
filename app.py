@@ -207,7 +207,7 @@ home_cards_css = (
 
 step1_cards_css = (
     """
-    /* ADIM 1: İnceleme Amacı Seçim Kartları — Ortak Kart Yapısı */
+    /* ADIM 1: İnceleme Amacı Seçim Kartları — Ortak Kart Yapısı (Hem Dark hem Light modda %100 opak ve yüksek kontrastlı!) */
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button {
         border-radius: 16px !important;
         padding: 1.45rem 1.55rem !important;
@@ -226,14 +226,14 @@ step1_cards_css = (
         cursor: pointer !important;
     }
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="secondary"] {
-        background: linear-gradient(155deg, rgba(30, 41, 59, 0.62) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
-        border: 1.5px solid rgba(148, 163, 184, 0.22) !important;
-        box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.28) !important;
+        background: linear-gradient(155deg, rgba(15, 23, 42, 0.94) 0%, rgba(11, 15, 25, 0.98) 100%) !important;
+        border: 1.5px solid rgba(148, 163, 184, 0.24) !important;
+        box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.35) !important;
     }
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="primary"] {
-        background: linear-gradient(155deg, rgba(37, 99, 235, 0.28) 0%, rgba(30, 58, 138, 0.52) 100%) !important;
+        background: linear-gradient(155deg, #1E3A8A 0%, #0F172A 100%) !important;
         border: 2px solid #60A5FA !important;
-        box-shadow: 0 0 28px -4px rgba(59, 130, 246, 0.42), 0 10px 24px -6px rgba(15, 23, 42, 0.5) !important;
+        box-shadow: 0 0 28px -4px rgba(59, 130, 246, 0.48), 0 10px 24px -6px rgba(15, 23, 42, 0.65) !important;
     }
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button:hover {
         transform: translateY(-5px) !important;
@@ -285,12 +285,66 @@ step1_cards_css = (
 st.markdown(
     f"""
     <style>
+    /* İşletim sistemi veya tarayıcı Light Mode'a alınsa bile kurumsal gece mavisi (Dark) temayı %100 koru! */
+    :root, html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {{
+        background-color: #0B0F19 !important;
+        color: #F8FAFC !important;
+        color-scheme: dark !important;
+    }}
+    section[data-testid="stSidebar"],
+    section[data-testid="stSidebar"] > div {{
+        background-color: #090D16 !important;
+        color: #F8FAFC !important;
+    }}
+    section[data-testid="stSidebar"] .stButton > button {{
+        background-color: rgba(30, 41, 59, 0.78) !important;
+        color: #F8FAFC !important;
+        border: 1px solid rgba(148, 163, 184, 0.24) !important;
+    }}
+    section[data-testid="stSidebar"] .stButton > button[kind="primary"] {{
+        background-color: rgba(37, 99, 235, 0.42) !important;
+        border-color: #60A5FA !important;
+        color: #FFFFFF !important;
+    }}
+    section[data-testid="stSidebar"] details,
+    div[data-testid="stExpander"] details {{
+        background-color: rgba(15, 23, 42, 0.85) !important;
+        border: 1px solid rgba(96, 165, 250, 0.24) !important;
+        border-radius: 10px !important;
+        color: #F8FAFC !important;
+    }}
+    section[data-testid="stSidebar"] summary,
+    div[data-testid="stExpander"] summary,
+    div[data-testid="stExpander"] summary p {{
+        color: #F8FAFC !important;
+    }}
+    div[data-testid="stMarkdownContainer"] h1,
+    div[data-testid="stMarkdownContainer"] h2,
+    div[data-testid="stMarkdownContainer"] h3,
+    div[data-testid="stMarkdownContainer"] h4,
+    div[data-testid="stMarkdownContainer"] h5,
+    div[data-testid="stMarkdownContainer"] p,
+    div[data-testid="stMarkdownContainer"] li,
+    div[data-testid="stCaptionContainer"] p {{
+        color: #E2E8F0 !important;
+    }}
+    section[data-testid="stFileUploaderDropzone"] span,
+    section[data-testid="stFileUploaderDropzone"] small,
+    section[data-testid="stFileUploaderDropzone"] div {{
+        color: #E2E8F0 !important;
+    }}
+    section[data-testid="stFileUploaderDropzone"] button {{
+        background-color: rgba(30, 58, 138, 0.65) !important;
+        color: #FFFFFF !important;
+        border: 1px solid #60A5FA !important;
+    }}
+
     {hide_sidebar_css}
 
     .guide-banner {{
-        background: linear-gradient(135deg, rgba(30, 58, 138, 0.42) 0%, rgba(15, 23, 42, 0.94) 100%);
-        border: 1px solid rgba(59, 130, 246, 0.35);
-        border-left: 4px solid #3B82F6;
+        background: linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%) !important;
+        border: 1px solid rgba(96, 165, 250, 0.42) !important;
+        border-left: 4px solid #3B82F6 !important;
         border-radius: 14px;
         padding: 1.1rem 1.4rem;
         margin-bottom: 1.2rem;
@@ -334,21 +388,21 @@ st.markdown(
     }}
 
     section[data-testid="stFileUploaderDropzone"] {{
-        border: 2px dashed rgba(59, 130, 246, 0.48) !important;
+        border: 2px dashed rgba(59, 130, 246, 0.55) !important;
         border-radius: 14px !important;
-        background: rgba(30, 41, 59, 0.38) !important;
+        background: rgba(15, 23, 42, 0.92) !important;
         padding: 1.35rem 1.2rem !important;
         transition: all 0.2s ease !important;
     }}
     section[data-testid="stFileUploaderDropzone"]:hover {{
         border-color: #60A5FA !important;
-        background: rgba(30, 58, 138, 0.25) !important;
+        background: rgba(30, 58, 138, 0.45) !important;
         transform: translateY(-2px) !important;
     }}
 
     div[data-testid="stVerticalBlockBorderWrapper"] {{
-        background: linear-gradient(155deg, rgba(30, 41, 59, 0.58) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
-        border: 1px solid rgba(96, 165, 250, 0.24) !important;
+        background: linear-gradient(155deg, rgba(15, 23, 42, 0.95) 0%, rgba(11, 15, 25, 0.98) 100%) !important;
+        border: 1px solid rgba(96, 165, 250, 0.28) !important;
         border-radius: 14px !important;
         transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease !important;
     }}
