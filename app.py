@@ -135,8 +135,8 @@ home_cards_css = (
         border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
         border-radius: 18px !important;
         padding: 1.9rem 1.85rem !important;
-        min-height: 325px !important;
-        height: 325px !important;
+        min-height: 335px !important;
+        height: 335px !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
@@ -156,37 +156,46 @@ home_cards_css = (
         box-shadow: 0 18px 38px -8px rgba(37, 99, 235, 0.42) !important;
         background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
     }
+    /* Streamlit st.button içindeki div'i varsayılan olarak flex-row yaptığı için p'ler yan yana diziliyordu!
+       Bunu display: block !important yaparak her paragrafın %100 kendi satırında alt alta durmasını zorluyoruz! */
+    .stButton > button > div,
     .stButton > button div[data-testid="stMarkdownContainer"] {
+        display: block !important;
         width: 100% !important;
         text-align: left !important;
     }
     .stButton > button p {
+        display: block !important;
+        width: 100% !important;
         text-align: left !important;
         white-space: normal !important;
-        line-height: 1.68 !important;
-        font-size: 0.93rem !important;
+        line-height: 1.55 !important;
+        font-size: 0.92rem !important;
         font-weight: 400 !important;
         color: #E2E8F0 !important;
-        margin: 0 0 0.55rem 0 !important;
+        margin: 0 0 0.52rem 0 !important;
     }
-    .stButton > button p:first-child {
-        font-size: 1.25rem !important;
+    .stButton > button p:first-of-type {
+        display: block !important;
+        width: 100% !important;
+        font-size: 1.24rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
-        padding-bottom: 0.72rem !important;
-        margin-bottom: 0.85rem !important;
-        width: 100% !important;
+        padding-bottom: 0.7rem !important;
+        margin-bottom: 0.8rem !important;
     }
-    .stButton > button p:nth-child(2) {
+    .stButton > button p:nth-of-type(2) {
+        display: block !important;
+        width: 100% !important;
         color: #94A3B8 !important;
-        font-size: 0.92rem !important;
+        font-size: 0.91rem !important;
         font-weight: 400 !important;
-        line-height: 1.5 !important;
-        margin-bottom: 0.95rem !important;
+        line-height: 1.48 !important;
+        margin-bottom: 0.85rem !important;
     }
     """
     if wizard_track == "HOME"
@@ -213,13 +222,11 @@ step1_cards_css = (
                     background 0.22s ease !important;
         cursor: pointer !important;
     }
-    /* Seçili Olmayan Kart (Sakin, temiz lacivert cam) */
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="secondary"] {
         background: linear-gradient(155deg, rgba(30, 41, 59, 0.62) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
         border: 1.5px solid rgba(148, 163, 184, 0.22) !important;
         box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.28) !important;
     }
-    /* Seçili Olan Kart (Zarifçe daha parlak mavi-lacivert ışıltı ve parlak kenarlık) */
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="primary"] {
         background: linear-gradient(155deg, rgba(37, 99, 235, 0.28) 0%, rgba(30, 58, 138, 0.52) 100%) !important;
         border: 2px solid #60A5FA !important;
@@ -230,11 +237,15 @@ step1_cards_css = (
         border-color: #93C5FD !important;
         box-shadow: 0 14px 32px -6px rgba(59, 130, 246, 0.45) !important;
     }
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button > div,
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button div[data-testid="stMarkdownContainer"] {
+        display: block !important;
         width: 100% !important;
         text-align: left !important;
     }
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p {
+        display: block !important;
+        width: 100% !important;
         text-align: left !important;
         white-space: normal !important;
         line-height: 1.58 !important;
@@ -243,7 +254,9 @@ step1_cards_css = (
         color: #CBD5E1 !important;
         margin: 0 !important;
     }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p:first-child {
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p:first-of-type {
+        display: block !important;
+        width: 100% !important;
         font-size: 1.16rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
@@ -253,7 +266,6 @@ step1_cards_css = (
         border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
         padding-bottom: 0.6rem !important;
         margin-bottom: 0.72rem !important;
-        width: 100% !important;
     }
     """
     if (wizard_track == "DOC_FLOW" and doc_step == 1)
@@ -873,8 +885,8 @@ if wizard_track == "HOME":
         card_1_md = (
             "📄 Dilekçe ve Dava Dosyası İncele\n\n"
             "Mevcut bir dilekçeyi, iddianameyi veya dava dosyasını yükleyerek hukuki denetim yapın ve cevap hazırlayın.\n\n"
-            "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder  \n"
-            "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar  \n"
+            "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder\n\n"
+            "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar\n\n"
             "✅ Emsal kararlarla güçlendirilmiş Cevap Dilekçesi (.docx) hazırlar"
         )
         if st.button(card_1_md, key="home_card_doc", width="stretch"):
@@ -884,8 +896,8 @@ if wizard_track == "HOME":
         card_2_md = (
             "💬 Hukuk Asistanına Sor & Dilekçe Yaz\n\n"
             "Dosya yüklemeden doğrudan hukuki sorularınıza yanıt alın, emsal karar arayın veya sıfırdan dilekçe yazdırın.\n\n"
-            "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap  \n"
-            "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama  \n"
+            "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap\n\n"
+            "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama\n\n"
             "✅ Olay özetinizden mahkemeye hazır resmi Word (.docx) dilekçe"
         )
         if st.button(card_2_md, key="home_card_ai", width="stretch"):
