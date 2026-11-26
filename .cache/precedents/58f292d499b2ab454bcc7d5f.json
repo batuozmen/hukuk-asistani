@@ -1,0 +1,27 @@
+[
+  {
+    "precedent_id": "YARG_9HD_2022_11450",
+    "query_text": "NETİCE-İ TALEP: Yukarıda arz ve izah edilen nedenlerle;",
+    "court_type": "Yargıtay",
+    "chamber": "9. Hukuk Dairesi",
+    "esas_no": "2022/11450",
+    "karar_no": "2022/13890",
+    "decision_date": "02.11.2022",
+    "verified_online": true,
+    "exact_number_match": true,
+    "topic_match_score": 0.65,
+    "legal_domain": "İş Hukuku",
+    "summary_principle": "Haklı bir neden olmaksızın kendi isteğiyle istifa eden işçi kıdem tazminatına hak kazanamaz; ayrıca sözleşmeyi fesheden taraf haklı nedenle dahi feshetse ihbar tazminatı talep edemez.",
+    "full_text": "YARGITAY 9. HUKUK DAİRESİ E. 2022/11450, K. 2022/13890, T. 02.11.2022:\nİş sözleşmesini 4857 sayılı İş Kanunu'nun 24'üncü maddesinde sayılan haklı fesih nedenlerinden birine dayanmaksızın kendi iradesiyle (istifa ederek) sona erdiren işçi kıdem tazminatına hak kazanamaz. Öte yandan ihbar tazminatı, belirsiz süreli iş sözleşmesini haklı bir neden olmaksızın ve usulüne uygun bildirim öneli tanımaksızın fesheden tarafın karşı tarafa ödemesi gereken bir tazminat olduğundan, iş sözleşmesini kendisi fesheden işçi (feshin haklı nedene dayanıp dayanmadığına bakılmaksızın) hiçbir koşulda ihbar tazminatı talep edemez.",
+    "related_statutes": [
+      "İşK m. 17",
+      "İşK m. 24"
+    ],
+    "polarity_hint": "aleyhe",
+    "source_channel": "Yargıtay / HGK / CGK Doğrulanmış Resmi İçtihat Veritabanı",
+    "source_url": "https://karararama.yargitay.gov.tr",
+    "lookup_status": "verified",
+    "hallucination_warning": "",
+    "citation_label": "Yargıtay 9. Hukuk Dairesi, T. 02.11.2022, E. 2022/11450, K. 2022/13890"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "precedent_id": "ICT_2",
+  "query_text": "Yargıtay 9. Hukuk Dairesi, 2024/999888 E., 2024/777666 K.",
+  "court_type": "Yargıtay",
+  "chamber": "9. Hukuk Dairesi",
+  "esas_no": "2024/999888",
+  "karar_no": "2024/777666",
+  "decision_date": "-",
+  "verified_online": false,
+  "exact_number_match": false,
+  "topic_match_score": 0.0,
+  "legal_domain": "İş Hukuku",
+  "summary_principle": "Haklı bir neden olmaksızın kendi isteğiyle istifa eden işçi kıdem tazminatına hak kazanamaz; ayrıca sözleşmeyi fesheden taraf haklı nedenle dahi feshetse ihbar tazminatı talep edemez.",
+  "full_text": "YARGITAY 9. HUKUK DAİRESİ E. 2022/11450, K. 2022/13890, T. 02.11.2022:\nİş sözleşmesini 4857 sayılı İş Kanunu'nun 24'üncü maddesinde sayılan haklı fesih nedenlerinden birine dayanmaksızın kendi iradesiyle (istifa ederek) sona erdiren işçi kıdem tazminatına hak kazanamaz. Öte yandan ihbar tazminatı, belirsiz süreli iş sözleşmesini haklı bir neden olmaksızın ve usulüne uygun bildirim öneli tanımaksızın fesheden tarafın karşı tarafa ödemesi gereken bir tazminat olduğundan, iş sözleşmesini kendisi fesheden işçi (feshin haklı nedene dayanıp dayanmadığına bakılmaksızın) hiçbir koşulda ihbar tazminatı talep edemez.",
+  "related_statutes": [
+    "İşK m. 17",
+    "İşK m. 24"
+  ],
+  "polarity_hint": "aleyhe",
+  "source_channel": "Resmi Yargıtay/UYAP Numara Doğrulama + Halüsinasyon Filtresi",
+  "source_url": "",
+  "lookup_status": "fake_or_mismatch",
+  "hallucination_warning": "🚨 SAHTE / UYDURMA İÇTİHAT ATFI (HALÜSİNASYON): Belirtilen '9. Hukuk Dairesi 2024/999888' numarasındaki '999888' sıra sayısı Türk yüksek yargı dosya numaralandırma sisteminde mevcut değildir (Yargıtay/Danıştay dairelerinde yıllık esas/karar sırası 6 haneli olamaz; tipik yapay zekâ halüsinasyonu). Doğrusu: 9. Hukuk Dairesi E. 2022/11450, K. 2022/13890 (02.11.2022) sayılı gerçek ilamda; \"Haklı bir neden olmaksızın kendi isteğiyle istifa eden işçi kıdem tazminatına hak kazanamaz; ayrıca sözleşmeyi fesheden taraf haklı nedenle dahi feshetse ihbar tazminatı talep edemez.\" hüküm altına alınmıştır.",
+  "citation_label": "Yargıtay 9. Hukuk Dairesi, T. -, E. 2024/999888, K. 2024/777666"
+}

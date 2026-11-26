@@ -1,0 +1,52 @@
+[
+  {
+    "precedent_id": "YARG_9HD_2023_4512",
+    "query_text": "5. Müvekkilim çalıştığı 4 yılı aşkın süre boyunca haftanın 6 günü sabah 08:00'den gece 22:00'ye kadar hiç ara dinlenmesi yapmadan günde 14 saat çalışmıştır. İşK",
+    "court_type": "Yargıtay",
+    "chamber": "9. Hukuk Dairesi",
+    "esas_no": "2023/4512",
+    "karar_no": "2023/6784",
+    "decision_date": "10.05.2023",
+    "verified_online": true,
+    "exact_number_match": true,
+    "topic_match_score": 0.98,
+    "legal_domain": "İş Hukuku",
+    "summary_principle": "Fazla mesai ücreti %100 değil %50 zamlı hesaplanır, günlük çalışmadan ara dinlenmesi düşülür, tanık beyanına dayalı uzun süreli hesaplamalardan %30 hakkaniyet indirimi yapılır ve işçilik alacaklarında bileşik faiz uygulanamaz.",
+    "full_text": "YARGITAY 9. HUKUK DAİRESİ E. 2023/4512, K. 2023/6784, T. 10.05.2023:\n4857 sayılı İş Kanunu'nun 41'inci maddesi uyarınca haftalık 45 saati aşan fazla çalışmalar %50 zamlı ücret üzerinden hesaplanır. Günlük çalışma süresinden aynı Kanun'un 68'inci maddesi uyarınca ara dinlenmesi (11 saati aşan çalışmalarda en az 1,5 saat) mutlaka mahsup edilmelidir. Bir işçinin yıllarca haftanın 6 günü hiç izin kullanmadan günde 14 saat çalışması hayatın olağan akışına ve insan tabiatına aykırı olduğundan, tanık beyanlarına dayalı fazla mesai hesabından hastalık, mazeret ve izin gibi nedenlerle %30 oranında hakkaniyet (takdiri) indirimi yapılması zorunludur. Ayrıca Türk hukukunda işçilik alacaklarına aylık bileşik faiz işletilmesi mümkün olmayıp, kıdem tazminatına fesih tarihinden itibaren mevduata uygulanan en yüksek faiz, fazla mesai ve ihbar tazminatına ise temerrüt/dava tarihinden itibaren yasal faiz uygulanır.",
+    "related_statutes": [
+      "İşK m. 41",
+      "İşK m. 68"
+    ],
+    "polarity_hint": "aleyhe",
+    "source_channel": "Yargıtay / HGK / CGK Doğrulanmış Resmi İçtihat Veritabanı",
+    "source_url": "https://karararama.yargitay.gov.tr",
+    "lookup_status": "verified",
+    "hallucination_warning": "",
+    "citation_label": "Yargıtay 9. Hukuk Dairesi, T. 10.05.2023, E. 2023/4512, K. 2023/6784"
+  },
+  {
+    "precedent_id": "YARG_9HD_2022_11450",
+    "query_text": "5. Müvekkilim çalıştığı 4 yılı aşkın süre boyunca haftanın 6 günü sabah 08:00'den gece 22:00'ye kadar hiç ara dinlenmesi yapmadan günde 14 saat çalışmıştır. İşK",
+    "court_type": "Yargıtay",
+    "chamber": "9. Hukuk Dairesi",
+    "esas_no": "2022/11450",
+    "karar_no": "2022/13890",
+    "decision_date": "02.11.2022",
+    "verified_online": true,
+    "exact_number_match": true,
+    "topic_match_score": 0.65,
+    "legal_domain": "İş Hukuku",
+    "summary_principle": "Haklı bir neden olmaksızın kendi isteğiyle istifa eden işçi kıdem tazminatına hak kazanamaz; ayrıca sözleşmeyi fesheden taraf haklı nedenle dahi feshetse ihbar tazminatı talep edemez.",
+    "full_text": "YARGITAY 9. HUKUK DAİRESİ E. 2022/11450, K. 2022/13890, T. 02.11.2022:\nİş sözleşmesini 4857 sayılı İş Kanunu'nun 24'üncü maddesinde sayılan haklı fesih nedenlerinden birine dayanmaksızın kendi iradesiyle (istifa ederek) sona erdiren işçi kıdem tazminatına hak kazanamaz. Öte yandan ihbar tazminatı, belirsiz süreli iş sözleşmesini haklı bir neden olmaksızın ve usulüne uygun bildirim öneli tanımaksızın fesheden tarafın karşı tarafa ödemesi gereken bir tazminat olduğundan, iş sözleşmesini kendisi fesheden işçi (feshin haklı nedene dayanıp dayanmadığına bakılmaksızın) hiçbir koşulda ihbar tazminatı talep edemez.",
+    "related_statutes": [
+      "İşK m. 17",
+      "İşK m. 24"
+    ],
+    "polarity_hint": "aleyhe",
+    "source_channel": "Yargıtay / HGK / CGK Doğrulanmış Resmi İçtihat Veritabanı",
+    "source_url": "https://karararama.yargitay.gov.tr",
+    "lookup_status": "verified",
+    "hallucination_warning": "",
+    "citation_label": "Yargıtay 9. Hukuk Dairesi, T. 02.11.2022, E. 2022/11450, K. 2022/13890"
+  }
+]

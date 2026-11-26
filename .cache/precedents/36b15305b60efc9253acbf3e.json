@@ -1,0 +1,54 @@
+[
+  {
+    "precedent_id": "YARG_15CD_2020_7412",
+    "query_text": "SUÇ: Tacir veya Şirket Yöneticisi Olan Kişilerin Ticari Faaliyetleri Sırasında Nitelikli Dolandırıcılık (TCK m. 158/1-h) ve Güveni Kötüye Kullanma (TCK m. 155/2",
+    "court_type": "Yargıtay",
+    "chamber": "15. Ceza Dairesi",
+    "esas_no": "2020/7412",
+    "karar_no": "2021/5920",
+    "decision_date": "18.05.2021",
+    "verified_online": true,
+    "exact_number_match": true,
+    "topic_match_score": 0.98,
+    "legal_domain": "Ceza Hukuku",
+    "summary_principle": "Ticari sözleşme kapsamında ödenen avansın iade edilmemesi TCK m. 155/2 güveni kötüye kullanma suçunu oluşturmaz; ayrıca aynı fiilin hem dolandırıcılık hem güveni kötüye kullanma suçunu aynı anda oluşturması hukuken imkânsızdır.",
+    "full_text": "YARGITAY 15. CEZA DAİRESİ E. 2020/7412, K. 2021/5920, T. 18.05.2021:\n5237 sayılı TCK'nın 155'inci maddesinde düzenlenen güveni kötüye kullanma suçunun konusunu, muhafaza edilmek veya belirli bir şekilde kullanılmak üzere zilyetliği devredilen mal oluşturur. Alım-satım veya malzeme tedarik sözleşmesi gereğince banka yoluyla ödenen avans bedelinin mülkiyeti alıcıdan satıcıya geçtiğinden, sözleşmenin ifa edilmemesi nedeniyle avansın iade edilmemesi güveni kötüye kullanma suçunu oluşturmaz. Kaldı ki zilyetlik hile ile ele geçirilmişse dolandırıcılık, rızayla devredildikten sonra amaç dışı tasarruf edilmişse güveni kötüye kullanma söz konusu olacağından tek bir eylemin aynı anda hem TCK m. 158 hem TCK m. 155/2 suçunu oluşturması hukuken olanaksızdır.",
+    "related_statutes": [
+      "TCK m. 155",
+      "TCK m. 155/2",
+      "TCK m. 158"
+    ],
+    "polarity_hint": "aleyhe",
+    "source_channel": "Yargıtay / HGK / CGK Doğrulanmış Resmi İçtihat Veritabanı",
+    "source_url": "https://karararama.yargitay.gov.tr",
+    "lookup_status": "verified",
+    "hallucination_warning": "",
+    "citation_label": "Yargıtay 15. Ceza Dairesi, T. 18.05.2021, E. 2020/7412, K. 2021/5920"
+  },
+  {
+    "precedent_id": "YARG_CGK_2019_15_465",
+    "query_text": "SUÇ: Tacir veya Şirket Yöneticisi Olan Kişilerin Ticari Faaliyetleri Sırasında Nitelikli Dolandırıcılık (TCK m. 158/1-h) ve Güveni Kötüye Kullanma (TCK m. 155/2",
+    "court_type": "CGK",
+    "chamber": "Yargıtay Ceza Genel Kurulu",
+    "esas_no": "2019/15-465",
+    "karar_no": "2021/184",
+    "decision_date": "06.05.2021",
+    "verified_online": true,
+    "exact_number_match": true,
+    "topic_match_score": 0.74,
+    "legal_domain": "Ceza Hukuku",
+    "summary_principle": "Gerçek bir ticari sözleşme ilişkisinde malın bir kısmının teslim edilip bakiye kısmının teslim edilememesi veya sözleşme kapsamında verilen çekin karşılıksız çıkması 'hukuki ihtilaf' niteliğindedir; en baştan aldatma kastı ve nitelikli hile yoksa TCK m. 158 dolandırıcılık suçu oluşmaz.",
+    "full_text": "YARGITAY CEZA GENEL KURULU E. 2019/15-465, K. 2021/184, T. 06.05.2021:\n5237 sayılı TCK'nın 157 ve 158/1-h maddelerinde düzenlenen dolandırıcılık suçunun oluşabilmesi için failin mağduru denetim olanağını ortadan kaldıracak boyutta hileli davranışlarla en baştan aldatması ve hile sonucunda haksız menfaat temin etmesi şarttır. Taraflar arasında imzalanan gerçek bir ticari tedarik sözleşmesi uyarınca edimin bir kısmının (ilk parti malzemenin) ifa edilmiş olması, bakiye kısmın zamanında teslim edilememesi veya önceden doğmuş ticari ilişki kapsamında verilen çekin bankada karşılıksız çıkması halinde aldatma kastından ve dolandırıcılık suçundan söz edilemez; uyuşmazlık özel hukuk (hukuki ihtilaf) mahiyetindedir.",
+    "related_statutes": [
+      "TCK m. 157",
+      "TCK m. 158",
+      "TCK m. 158/1-h"
+    ],
+    "polarity_hint": "aleyhe",
+    "source_channel": "Yargıtay / HGK / CGK Doğrulanmış Resmi İçtihat Veritabanı",
+    "source_url": "https://karararama.yargitay.gov.tr",
+    "lookup_status": "verified",
+    "hallucination_warning": "",
+    "citation_label": "Yargıtay Ceza Genel Kurulu, T. 06.05.2021, E. 2019/15-465, K. 2021/184"
+  }
+]

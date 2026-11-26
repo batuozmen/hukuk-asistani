@@ -1,0 +1,25 @@
+{
+  "precedent_id": "ICT_2",
+  "query_text": "Yargıtay Hukuk Genel Kurulu, 2017/2792 E., 2021/267 K.",
+  "court_type": "HGK",
+  "chamber": "Yargıtay Hukuk Genel Kurulu",
+  "esas_no": "2017/2792",
+  "karar_no": "2021/267",
+  "decision_date": "16.03.2021",
+  "verified_online": true,
+  "exact_number_match": true,
+  "topic_match_score": 1.0,
+  "legal_domain": "Borçlar ve Kira Hukuku",
+  "summary_principle": "Beş yıldan uzun süreli veya beş yıldan sonra yenilenen kira sözleşmelerinde (TBK m. 344/3), kira bedeli TÜFE oranıyla sınırlı olmaksızın taşınmazın durumu, emsal kira bedelleri ve eski kiracı hakkaniyet indirimi (%10-%20) gözetilerek hâkim tarafından belirlenir.",
+  "full_text": "YARGITAY HUKUK GENEL KURULU E. 2017/2792, K. 2021/267, T. 16.03.2021:\n6098 sayılı Türk Borçlar Kanunu'nun 344/3 maddesi uyarınca beş yıldan uzun süreli veya beş yıldan sonra yenilenen kira sözleşmelerinde yeni kira döneminde uygulanacak kira bedeli belirlenirken; mahkemece uzman bilirkişi marifetiyle taşınmazda keşif yapılmalı, kiralananın serbest şartlarda boş olarak kiraya verilmesi halinde getirebileceği emsal kira bedeli tespit edilmeli, TÜFE 12 aylık ortalama değişim oranı ve kiralananın nitelikleri değerlendirilerek davalının eski kiracı olması nedeniyle makul bir oranda (%10-%20) hakkaniyet indirimi yapıldıktan sonra kira bedeline hükmedilmelidir.",
+  "related_statutes": [
+    "TBK m. 344",
+    "TBK m. 345"
+  ],
+  "polarity_hint": "lehe",
+  "source_channel": "Yargıtay / UYAP Emsal Resmi İçtihat Veritabanı",
+  "source_url": "https://karararama.yargitay.gov.tr",
+  "lookup_status": "verified",
+  "hallucination_warning": "",
+  "citation_label": "Yargıtay Hukuk Genel Kurulu, T. 16.03.2021, E. 2017/2792, K. 2021/267"
+}

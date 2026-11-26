@@ -1,0 +1,25 @@
+{
+  "precedent_id": "ICT_1",
+  "query_text": "Yargıtay 9. Hukuk Dairesi, T. 14.03.2022, 2021/8742 E., 2022/3415 K.",
+  "court_type": "Yargıtay",
+  "chamber": "9. Hukuk Dairesi",
+  "esas_no": "2021/8742",
+  "karar_no": "2022/3415",
+  "decision_date": "14.03.2022",
+  "verified_online": true,
+  "exact_number_match": true,
+  "topic_match_score": 1.0,
+  "legal_domain": "İş Hukuku",
+  "summary_principle": "İş sözleşmesinin İşK m. 25/II uyarınca haklı nedenle feshedildiğini ispat yükü işverene aittir; soyut iddialarla işçinin kıdem ve ihbar tazminatı hakkı ortadan kaldırılamaz.",
+  "full_text": "YARGITAY 9. HUKUK DAİRESİ E. 2021/8742, K. 2022/3415, T. 14.03.2022:\n4857 sayılı İş Kanunu'nun 25/II maddesi kapsamında iş sözleşmesinin işverence haklı nedenle derhal feshedildiğinin savunulması halinde, feshin haklı nedene dayandığını somut, kesin ve inandırıcı delillerle ispat yükümlülüğü davalı işverene aittir. İşverenin ekonomik daralma veya soyut performans iddiaları İşK m. 25/II-e anlamında doğruluk ve bağlılığa aykırılık oluşturmaz. Haklı fesih ispatlanamadığından davacı işçinin kıdem ve ihbar tazminatı taleplerinin kabulü gerekir.",
+  "related_statutes": [
+    "İşK m. 25",
+    "İşK m. 17"
+  ],
+  "polarity_hint": "lehe",
+  "source_channel": "Yargıtay / UYAP Emsal Resmi İçtihat Veritabanı",
+  "source_url": "https://karararama.yargitay.gov.tr",
+  "lookup_status": "verified",
+  "hallucination_warning": "",
+  "citation_label": "Yargıtay 9. Hukuk Dairesi, T. 14.03.2022, E. 2021/8742, K. 2022/3415"
+}

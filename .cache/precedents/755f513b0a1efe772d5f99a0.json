@@ -1,0 +1,78 @@
+[
+  {
+    "precedent_id": "YARG_3HD_2022_4120",
+    "query_text": "4. Ayrıca müvekkilimin yurt dışında eğitim gören oğlu Türkiye'ye kesin dönüş yapmış olup halihazırda ailesinin yanında geçici olarak ikamet etmektedir. TBK m. 3",
+    "court_type": "Yargıtay",
+    "chamber": "3. Hukuk Dairesi",
+    "esas_no": "2022/4120",
+    "karar_no": "2022/6815",
+    "decision_date": "19.09.2022",
+    "verified_online": true,
+    "exact_number_match": true,
+    "topic_match_score": 0.98,
+    "legal_domain": "Borçlar ve Kira Hukuku",
+    "summary_principle": "Kiraya verenin reşit olan altsoyunun (çocuğunun) ailesinin yanından ayrılarak bağımsız konutta yaşama isteği, TBK m. 350/1 kapsamında gerçek, samimi ve zorunlu konut ihtiyacı kabul edilir.",
+    "full_text": "YARGITAY 3. HUKUK DAİRESİ E. 2022/4120, K. 2022/6815, T. 19.09.2022:\n6098 sayılı Türk Borçlar Kanunu'nun 350/1 maddesi uyarınca kiraya verenin kendisi, eşi, altsoyu veya üstsoyu için konut gereksinimi nedeniyle açtığı tahliye davasında ihtiyacın gerçek, samimi ve zorunlu olduğunun kanıtlanması gerekir. Reşit olan altsoyun ailesiyle birlikte yaşamaya zorlanamayacağı, eğitimini tamamlayarak veya yurt dışından dönerek ayrı bir konutta ikamet etmek istemesinin hayatın olağan akışına uygun, gerçek ve samimi bir konut ihtiyacı olduğu yerleşik Yargıtay içtihatlarıyla sabittir.",
+    "related_statutes": [
+      "TBK m. 350",
+      "TBK m. 350/1"
+    ],
+    "polarity_hint": "lehe",
+    "source_channel": "Yargıtay / HGK / CGK Doğrulanmış Resmi İçtihat Veritabanı",
+    "source_url": "https://karararama.yargitay.gov.tr",
+    "lookup_status": "verified",
+    "hallucination_warning": "",
+    "citation_label": "Yargıtay 3. Hukuk Dairesi, T. 19.09.2022, E. 2022/4120, K. 2022/6815"
+  },
+  {
+    "precedent_id": "YARG_3HD_2023_2910",
+    "query_text": "4. Ayrıca müvekkilimin yurt dışında eğitim gören oğlu Türkiye'ye kesin dönüş yapmış olup halihazırda ailesinin yanında geçici olarak ikamet etmektedir. TBK m. 3",
+    "court_type": "Yargıtay",
+    "chamber": "3. Hukuk Dairesi",
+    "esas_no": "2023/2910",
+    "karar_no": "2023/4105",
+    "decision_date": "05.12.2023",
+    "verified_online": true,
+    "exact_number_match": true,
+    "topic_match_score": 0.98,
+    "legal_domain": "Borçlar ve Kira Hukuku",
+    "summary_principle": "01.09.2023 tarihinden sonra açılacak kira bedelinin tespiti ve tahliye davalarında dava açılmadan önce arabulucuya başvurulması dava şartıdır (HUAK m. 18/B); ayrıca ihtiyaç nedeniyle tahliye davasında sözleşme bitiminden itibaren 1 aylık hak düşürücü süreye uyulmalıdır.",
+    "full_text": "YARGITAY 3. HUKUK DAİRESİ E. 2023/2910, K. 2023/4105, T. 05.12.2023:\n7445 sayılı Kanun ile 6325 sayılı Hukuk Uyuşmazlıklarında Arabuluculuk Kanunu'na eklenen 18/B maddesi uyarınca 01.09.2023 tarihinden itibaren kiralanan taşınmazların 2004 sayılı İİK'ya göre ilamsız icra yoluyla tahliyesine ilişkin hükümler hariç olmak üzere, kira ilişkisinden kaynaklanan uyuşmazlıklarda (kira bedelinin tespiti ve ihtiyaç nedeniyle tahliye davaları dahil) dava açılmadan önce arabulucuya başvurulmuş olması dava şartıdır. Ayrıca TBK m. 350/1 uyarınca belirli süreli kira sözleşmelerinde sürenin sonundan itibaren 1 ay içinde (veya TBK m. 353 uyarınca bu süre içinde yapılan yazılı bildirimle uzayan kira yılı içinde) dava açılması kamu düzenine ilişkin hak düşürücü süredir.",
+    "related_statutes": [
+      "TBK m. 344",
+      "TBK m. 350",
+      "HUAK m. 18/B"
+    ],
+    "polarity_hint": "usul",
+    "source_channel": "Yargıtay / HGK / CGK Doğrulanmış Resmi İçtihat Veritabanı",
+    "source_url": "https://karararama.yargitay.gov.tr",
+    "lookup_status": "verified",
+    "hallucination_warning": "",
+    "citation_label": "Yargıtay 3. Hukuk Dairesi, T. 05.12.2023, E. 2023/2910, K. 2023/4105"
+  },
+  {
+    "precedent_id": "YARG_HGK_2017_2792",
+    "query_text": "4. Ayrıca müvekkilimin yurt dışında eğitim gören oğlu Türkiye'ye kesin dönüş yapmış olup halihazırda ailesinin yanında geçici olarak ikamet etmektedir. TBK m. 3",
+    "court_type": "HGK",
+    "chamber": "Yargıtay Hukuk Genel Kurulu",
+    "esas_no": "2017/2792",
+    "karar_no": "2021/267",
+    "decision_date": "16.03.2021",
+    "verified_online": true,
+    "exact_number_match": true,
+    "topic_match_score": 0.65,
+    "legal_domain": "Borçlar ve Kira Hukuku",
+    "summary_principle": "Beş yıldan uzun süreli veya beş yıldan sonra yenilenen kira sözleşmelerinde (TBK m. 344/3), kira bedeli TÜFE oranıyla sınırlı olmaksızın taşınmazın durumu, emsal kira bedelleri ve eski kiracı hakkaniyet indirimi (%10-%20) gözetilerek hâkim tarafından belirlenir.",
+    "full_text": "YARGITAY HUKUK GENEL KURULU E. 2017/2792, K. 2021/267, T. 16.03.2021:\n6098 sayılı Türk Borçlar Kanunu'nun 344/3 maddesi uyarınca beş yıldan uzun süreli veya beş yıldan sonra yenilenen kira sözleşmelerinde yeni kira döneminde uygulanacak kira bedeli belirlenirken; mahkemece uzman bilirkişi marifetiyle taşınmazda keşif yapılmalı, kiralananın serbest şartlarda boş olarak kiraya verilmesi halinde getirebileceği emsal kira bedeli tespit edilmeli, TÜFE 12 aylık ortalama değişim oranı ve kiralananın nitelikleri değerlendirilerek davalının eski kiracı olması nedeniyle makul bir oranda (%10-%20) hakkaniyet indirimi yapıldıktan sonra kira bedeline hükmedilmelidir.",
+    "related_statutes": [
+      "TBK m. 344",
+      "TBK m. 345"
+    ],
+    "polarity_hint": "lehe",
+    "source_channel": "Yargıtay / HGK / CGK Doğrulanmış Resmi İçtihat Veritabanı",
+    "source_url": "https://karararama.yargitay.gov.tr",
+    "lookup_status": "verified",
+    "hallucination_warning": "",
+    "citation_label": "Yargıtay Hukuk Genel Kurulu, T. 16.03.2021, E. 2017/2792, K. 2021/267"
+  }
+]

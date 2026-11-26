@@ -1,0 +1,25 @@
+{
+  "precedent_id": "ICT_3",
+  "query_text": "Yargıtay 3. Hukuk Dairesi, 2022/4120 E., 2022/6815 K.",
+  "court_type": "Yargıtay",
+  "chamber": "3. Hukuk Dairesi",
+  "esas_no": "2022/4120",
+  "karar_no": "2022/6815",
+  "decision_date": "19.09.2022",
+  "verified_online": true,
+  "exact_number_match": true,
+  "topic_match_score": 1.0,
+  "legal_domain": "Borçlar ve Kira Hukuku",
+  "summary_principle": "Kiraya verenin reşit olan altsoyunun (çocuğunun) ailesinin yanından ayrılarak bağımsız konutta yaşama isteği, TBK m. 350/1 kapsamında gerçek, samimi ve zorunlu konut ihtiyacı kabul edilir.",
+  "full_text": "YARGITAY 3. HUKUK DAİRESİ E. 2022/4120, K. 2022/6815, T. 19.09.2022:\n6098 sayılı Türk Borçlar Kanunu'nun 350/1 maddesi uyarınca kiraya verenin kendisi, eşi, altsoyu veya üstsoyu için konut gereksinimi nedeniyle açtığı tahliye davasında ihtiyacın gerçek, samimi ve zorunlu olduğunun kanıtlanması gerekir. Reşit olan altsoyun ailesiyle birlikte yaşamaya zorlanamayacağı, eğitimini tamamlayarak veya yurt dışından dönerek ayrı bir konutta ikamet etmek istemesinin hayatın olağan akışına uygun, gerçek ve samimi bir konut ihtiyacı olduğu yerleşik Yargıtay içtihatlarıyla sabittir.",
+  "related_statutes": [
+    "TBK m. 350",
+    "TBK m. 350/1"
+  ],
+  "polarity_hint": "lehe",
+  "source_channel": "Yargıtay / UYAP Emsal Resmi İçtihat Veritabanı",
+  "source_url": "https://karararama.yargitay.gov.tr",
+  "lookup_status": "verified",
+  "hallucination_warning": "",
+  "citation_label": "Yargıtay 3. Hukuk Dairesi, T. 19.09.2022, E. 2022/4120, K. 2022/6815"
+}

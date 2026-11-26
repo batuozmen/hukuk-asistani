@@ -1,0 +1,294 @@
+================================================================================
+YAPAY ZEKA DESTEKLİ HUKUKİ DİLEKÇE, DAVA DOSYASI, İÇTİHAT (EMSAL KARAR)
+DOĞRULAMA, STRATEJİ VE SIFIR HALÜSİNASYONLU DİLEKÇE YAZIM SİSTEMİ
+MASTER TEKNİK MİMARİ RAPORU, KESİN KURALLAR VE YOL HARİTASI (hukuk_asistani)
+================================================================================
+Son Güncelleme: 26.11.2026 - ADIM 15 Tamamlandı (Git & GitHub `hukuk-asistani` Reposu Kuruldu ve Tüm Dosyalar Yedeklendi)
+
+--------------------------------------------------------------------------------
+BÖLÜM 0: YAPAY ZEKA ASİSTANI İÇİN KESİN VE ZORUNLU ÇALIŞMA KURALLARI (İHLAL EDİLEMEZ!)
+--------------------------------------------------------------------------------
+1. ONAY ALMADAN TEK SATIR KOD YAZMA YASAĞI:
+   - Her adıma başlamadan önce kullanıcıya o adımda hangi dosyada ne yapacağını,
+     hangi fonksiyonları ve özellikleri ekleyeceğini açık ve anlaşılır Türkçe ile anlat.
+   - Kullanıcı açıkça "onaylıyorum / başla / devam" demeden ASLA dosya oluşturma
+     veya düzenleme!
+2. HER ADIMDA YOL HARİTASI, MASAÜSTÜ VE GITHUB SENKRONİZASYONU:
+   - Tamamlanan her adım sonunda bu `yol_haritasi.txt` dosyasını güncelle (`[✅ TAMAMLANDI]`).
+   - Oluşturulan veya güncellenen her dosyayı hem çalışma dizininde
+     (`c:\Users\btuoz\Documents\deepseek-harness\default-workspace\hukuk_asistani`)
+     hem de masaüstü dizininde (`C:\Users\btuoz\Desktop\hukuk_asistani`) birebir eşitle.
+   - Her adım sonunda tüm dosyaları GitHub reposuna (`git add -A && git commit && git push`) gönder.
+3. KANITLANMIŞ REFERANS KOD TABANI (`zelisimv1` MİMARİSİ):
+   - Bu proje, aynı bilgisayarda bulunan ve 40 adımda mükemmelleştirilmiş olan
+     `c:\Users\btuoz\Documents\deepseek-harness\default-workspace\zelisimv1`
+     (ve `C:\Users\btuoz\Desktop\zelisimv1`) projesinin kardeş projesidir.
+   - Kod yazarken `zelisimv1` içindeki `document_parser.py`, `academic_fetcher.py`,
+     `rag_verifier.py`, `app.py`, `.streamlit/config.toml` ve `baslat.bat` dosyalarını
+     mutlaka oku ve oradaki kanıtlanmış mimari kalıpları referans al!
+4. DAHA ÖNCE ÇÖZÜLEN VE TEKRARLANMAMASI GEREKEN 6 KRİTİK TEKNİK KURAL:
+   - KURAL A (Seçim ve Sekme Hafızası İzolasyonu): 1. Adımdaki çalışma yöntemi
+     sekmeleri (`doc_upload`, `doc_saved`, `doc_demo`) birbirinden tamamen bağımsız
+     `st.session_state` anahtarları kullanmalıdır. Sekme değiştirildiğinde yüklenen
+     dilekçe asla kaybolmamalı ve diğer sekmeye karışmamalıdır (`zelisimv1/app.py` ADIM 40).
+   - KURAL B (Tablolarda Cümle Kırpma Yasağı): `st.dataframe` veya `st.data_editor`
+     tablolarında metinler `[:180]` veya `[:95]` gibi dilimlemelerle ASLA kesilmemelidir;
+     tam metin verilmeli ve `row_height=48..52` + `column_config` kullanılmalıdır (`ADIM 32`).
+   - KURAL C (Kaydırmasız Mod Seçici ve Sayı Girişli Otomatik Aralık Seçimi):
+     `st.segmented_control` dar sütuna sıkıştırılmamalı, tam genişlikte olmalıdır.
+     İddia/paragraf aralığı seçiminde kaydırma çubuğu (`slider`) yerine doğrudan sayı
+     kutuları (`Başlangıç No` ve `Bitiş No`, `on_change` ile tabloyu anında güncelleyen)
+     + `Tümünü Seç` + `Seçilenleri Temizle` + `Seçilenleri Denetle` kullanılmalıdır (`ADIM 33`).
+   - KURAL D (Filtreleme Kutucukları): Sonuç filtrelemede ilk açılışta yalnızca
+     `📋 Tümünü Göster` tikli (`True`), diğer kategori kutucukları tiksiz (`False`)
+     gelmelidir. Kullanıcı bir kategoriye tik attığında `Tümünü Göster` otomatik
+     kalkmalı ve sadece o kategori görünmelidir (`ADIM 34`).
+   - KURAL E (Orijinal Metne Otomatik Müdahale Yasağı): Avukatın yüklediği dilekçenin
+     orijinal metnindeki hiçbir kelime otomatik değiştirilmez! Word (`.docx`) inceleme
+     kopyasında yalnızca ilgili paragrafların altına `para._p.addnext(note_p._p)` ile
+     renkli `🔎 [HUKUKİ HAKEM VE İÇTİHAT NOTU]` kutuları eklenir. Sıfırdan dilekçe
+     yazımı ise ayrı bir çıktı olarak üretilir (`ADIM 36`).
+   - KURAL F (`baslat.bat` ve `kurulum_yap.bat` Güvenliği): Windows Batch (`.bat`)
+     dosyalarında `if (...)` bloklarının içinde parantezli `echo` metinleri
+     kullanılmamalı, `goto :ETIKET` yapısı, saf ASCII karakterler ve CRLF (`\r\n`)
+     satır sonları kullanılmalıdır. Ayrıca `baslat.bat`, eğer kendi klasöründe `.venv`
+     yoksa `C:\Users\btuoz\Desktop\zelisimv1\.venv\Scripts\streamlit.exe` ortamını
+     otomatik bularak 3 GB kütüphaneyi tekrar indirmeden anında çalışmalıdır!
+
+--------------------------------------------------------------------------------
+BÖLÜM 1: KULLANILACAK TEKNOLOJİ YIĞINI (TECH STACK) VE DONANIM MİMARİSİ
+--------------------------------------------------------------------------------
+1. Donanım Optimizasyonu (RTX 3050 4 GB VRAM + CPU İş Bölümü):
+   - Çok Dilli Vektör Arama (`SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")`):
+     Kesinlikle `device="cpu"` olarak çalıştırılır. Böylece 4 GB GPU belleği tamamen
+     yerel LLM'e ayrılır.
+   - Yerel LLM (`Ollama — qwen2.5:3b`):
+     GPU üzerinde çalışır. Her LLM çağrısı `ThreadPoolExecutor` ile **90 saniye
+     zaman aşımı (timeout)** korumasına alınır. Eğer Ollama servisi kapalıysa veya
+     zaman aşımı olursa arayüz asla donmaz; deterministik Hukuki Kural Motoru
+     (Fallback) devreye girer.
+
+2. Python Kütüphaneleri:
+   - Belge Okuma & Yazma : `pymupdf` (`fitz` - PDF okuma), `python-docx` (Word XML okuma
+                           ve resmi dilekçe / hakem notlu `.docx` üretimi)
+   - Web & API Avcısı    : `requests`, `beautifulsoup4`, `lxml`, `concurrent.futures`
+   - Vektör & Yapay Zeka : `torch`, `sentence-transformers`, `scikit-learn`, `ollama`
+   - Arayüz & Raporlama  : `streamlit`, `pandas`
+
+--------------------------------------------------------------------------------
+BÖLÜM 2: YARDIM ALINACAK AÇIK KAYNAK REPOLAR VE RESMİ VERİTABANI UÇ NOKTALARI
+--------------------------------------------------------------------------------
+`precedent_fetcher.py` modülü, ücretli hiçbir üçüncü parti servise (`yargipro.com` vb.)
+bağımlı olmadan, açık kaynak `saidsurucu/yargi-mcp` ve `@saidsrc/yargi` projelerinin de
+kullandığı Türkiye Cumhuriyeti resmi yargı ve mevzuat uç noktalarını doğrudan sorgular:
+
+1. UYAP Bedesten / Birleşik Yüksek Yargı & İstinaf Emsal Karar API'si (Birincil Kanal):
+   - Arama Uç Noktası : `POST https://bedesten.adalet.gov.tr/emsal-karar/searchDocuments`
+   - İçerik Uç Noktası: `POST https://bedesten.adalet.gov.tr/emsal-karar/getDocumentContent`
+   - Kapsam           : Yargıtay, Danıştay, Bölge Adliye Mahkemeleri (BAM / İstinaf)
+                        ve Yerel Mahkeme Emsal Kararları.
+
+2. Yargıtay Karar Arama Resmi İstemcisi (İkincil / Doğrudan Kanal):
+   - Arama Uç Noktası : `https://karararama.yargitay.gov.tr/YargitayBilgiBankasiIstemciWeb/`
+   - Kapsam           : Yargıtay Hukuk Daireleri (1..23 HD), Ceza Daireleri (1..23 CD),
+                        Hukuk Genel Kurulu (HGK), Ceza Genel Kurulu (CGK) ve İçtihadı
+                        Birleştirme Kararları (İBK).
+
+3. UYAP Emsal Karar Arama Resmi İstemcisi:
+   - Arama Uç Noktası : `https://emsal.uyap.gov.tr/BilgiBankasiIstemciWeb/`
+
+4. Danıştay Karar Arama & Anayasa Mahkemesi (AYM) Bilgi Bankası:
+   - Danıştay         : `https://karararama.danistay.gov.tr` (İdari Dava ve Vergi Daireleri)
+   - AYM              : `https://kararlarbilgibankasi.anayasa.gov.tr` (Bireysel Başvuru & Norm Denetimi)
+
+5. Cumhurbaşkanlığı Mevzuat Bilgi Sistemi + Yerleşik Temel Kanun Sözlüğü:
+   - Canlı Sorgu      : `https://www.mevzuat.gov.tr`
+   - Yerleşik Çekirdek Mevzuat Veritabanı: İnternet kesintisi veya hız sınırı durumunda
+     bile anında doğrulama yapabilmek için Türk hukukunun en çok kullanılan temel
+     kanun maddeleri (`TCK 5237`, `CMK 5271`, `TBK 6098`, `TMK 4721`, `HMK 6100`,
+     `İşK 4857`, `İİK 2004`, `TTK 6102`, `İYUK 2577`, `TKHK 6502`) ayrıca modül içinde
+     yapılandırılmış referans sözlüğü olarak da yer alır.
+
+6. Açık Web / Jina Reader & Yerel İçtihat PDF Havuzu (`.cache/user_ictihat_pdfs`):
+   - Resmi API'lerde anlık bakım veya hız sınırı olması durumunda açık hukuk kaynaklarından
+     yalnızca resmi `Esas No / Karar No` eşleşmesi doğrulanan kararları çeker ve avukatın
+     kendi yüklediği emsal karar PDF'lerini doğrudan tam metin olarak okur.
+
+--------------------------------------------------------------------------------
+BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
+--------------------------------------------------------------------------------
+[✅ TAMAMLANDI] ADIM 1: Bağımsız Proje Klasörünün (`hukuk_asistani`) ve Master Teknik Mimari Raporunun (`yol_haritasi.txt`) Oluşturulması
+  - Oluşturulan Dosya: yol_haritasi.txt
+
+[✅ TAMAMLANDI] ADIM 2: Uzun Dilekçe, Savcılık/Mahkeme Evrakı ve Hukuki Atıf Ayrıştırıcı (`legal_parser.py`)
+  - Oluşturulacak Dosya: legal_parser.py
+  - Veri Sınıfları (`@dataclass`):
+    1. `StatuteReference`:
+       * `ref_id`: str (`"MEV_1"`)
+       * `law_code`: str (`"TBK"`, `"TCK"`, `"CMK"`, `"HMK"`, `"İşK"`, `"İİK"`, `"TMK"`, `"TTK"`, `"İYUK"`)
+       * `law_number`: Optional[str] (`"6098"`, `"5237"` vb.)
+       * `article`: str (`"344"`, `"25/II-e"`, `"119/1-ğ"`)
+       * `raw_mention`: str (Metinde geçtiği tam ifade)
+       * `context_sentence`: str (Geçtiği cümle)
+    2. `PrecedentCitation`:
+       * `cit_id`: str (`"ICT_1"`)
+       * `court_type`: str (`"Yargıtay"`, `"Danıştay"`, `"BAM"`, `"AYM"`, `"HGK"`, `"CGK"`)
+       * `chamber`: str (`"9. Hukuk Dairesi"`, `"12. Ceza Dairesi"` vb.)
+       * `esas_no`: Optional[str] (`"2022/1453"`)
+       * `karar_no`: Optional[str] (`"2023/2891"`)
+       * `decision_date`: Optional[str] (`"14.05.2023"`)
+       * `raw_marker`: str
+       * `claim_sentence`: str (Karara dayanılarak ileri sürülen hukuki iddia cümlesi)
+       * `paragraph_index`: int
+    3. `LegalClaimItem`:
+       * `claim_id`: str (`"IDDIA_1"`)
+       * `section_name`: str (`"OLAYLAR VE AÇIKLAMALAR"`, `"HUKUKİ SEBEPLER"`, `"SAVUNMA"`, `"NETİCE-İ TALEP"`)
+       * `paragraph_index`: int
+       * `claim_text`: str (İddia veya savunma paragrafının tam metni)
+       * `claim_category`: str (`"Vakıa / Olay"`, `"Usul İtirazı"`, `"Hukuki Niteleme"`, `"Delil / İspat"`, `"Talep / İstem"`)
+       * `related_statutes`: List[str]
+       * `related_precedents`: List[str]
+    4. `ProceduralCheckItem`:
+       * `check_title`: str (`"Hitap Makamı ve Görevli Mahkeme"`, `"Zorunlu Arabuluculuk / Dava Şartı"`, `"Zamanaşımı / Hak Düşürücü Süre"`, `"Faiz Türü ve Başlangıç Tarihi"`, `"Deliller ve Netice-i Talep Uyumu"`)
+       * `status`: str (`"ok"` | `"warning"` | `"missing"`)
+       * `detail`: str
+       * `recommendation`: str
+    5. `ParsedLegalDocument`:
+       * `filename`: str
+       * `total_chars`: int
+       * `page_count`: int
+       * `document_type`: str (`"Dava Dilekçesi"`, `"Cevap Dilekçesi"`, `"Savcılık Şikâyet Dilekçesi"`, `"İddianame / Savunma"`, `"İstinaf / Temyiz Dilekçesi"`, `"Bilirkişi Raporuna İtiraz"`)
+       * `legal_domain`: str (`"İş Hukuku"`, `"Ceza Hukuku"`, `"Borçlar ve Kira Hukuku"`, `"Aile Hukuku"`, `"İcra ve İflas Hukuku"`, `"Ticaret Hukuku"`, `"İdare ve Vergi Hukuku"`, `"Tüketici Hukuku"`)
+       * `authority`: str (Tespit edilen mahkeme veya savcılık makamı)
+       * `case_file_no`: Optional[str] (Tespit edilen Esas / Soruşturma No)
+       * `parties`: Dict[str, str] (Davacı/Müşteki, Davalı/Şüpheli, Vekiller)
+       * `full_text`: str
+       * `sections`: Dict[str, str]
+       * `claims`: List[LegalClaimItem] (Uzun dilekçenin baştan sona tüm iddia/savunma bentleri)
+       * `statute_refs`: List[StatuteReference]
+       * `precedent_citations`: List[PrecedentCitation]
+       * `procedural_checks`: List[ProceduralCheckItem]
+       * `neticei_talep`: str
+
+[✅ TAMAMLANDI] ADIM 3: Resmi Kaynak Sitelerden Canlı Emsal Karar ve Mevzuat Avcısı (`precedent_fetcher.py`)
+  - Oluşturulacak Dosya: precedent_fetcher.py
+  - Yapılacaklar:
+    * `FetchedPrecedent` ve `FetchedStatute` veri sınıfları.
+    * Dilekçede yazan `Esas / Karar No` atıflarını resmi Yargıtay/Danıştay/UYAP Bedesten
+      üzerinden doğrulama: Numara uydurmaysa (ChatGPT halüsinasyonu) veya bambaşka bir
+      davaya aitse `lookup_status="fake_or_mismatch"` olarak işaretleme.
+    * Dilekçedeki her bir `LegalClaimItem` (hukuki iddia) için otomatik arama sorgusu
+      üretip resmi kaynaklardan hem lehe (destekleyen) hem aleyhe (çelişen) gerçek
+      yüksek mahkeme kararlarını ve ilgili kanun maddesi metinlerini paralel çekme.
+
+[✅ TAMAMLANDI] ADIM 4: Hukuki Özetleme, Emsal Karşılaştırma ve Çelişki/Uyum Hakemi (`legal_rag_verifier.py`)
+  - Oluşturulacak Dosya: legal_rag_verifier.py
+  - Yapılacaklar:
+    * Uzun dilekçenin tamamını hukuki dille özetleyen `generate_executive_legal_summary()`.
+    * Dilekçedeki her bir iddiayı (`LegalClaimItem`) ve içtihat atfını (`PrecedentCitation`)
+      çekilen gerçek kararlarla Semantik RAG (`paraphrase-multilingual-MiniLM-L12-v2` CPU)
+      + Yerel LLM (`Ollama qwen2.5:3b`) + Deterministik Hukuki Kural Katmanıyla denetleyen
+      motor:
+      - `✅ EMSAL KARARLA TAM DESTEKLENİYOR (LEHE İÇTİHAT)`
+      - `❌ YERLEŞİK İÇTİHATLA / KANUNLA ÇELİŞİYOR (ALEYHE RİSK)`
+      - `🚨 UYDURMA / ÇARPITILMIŞ KARAR ATFI (HALÜSİNASYON TESPİTİ)`
+      - `⚠️ EK İSPAT / USUL ŞARTI GEREKTİRİYOR`
+
+[✅ TAMAMLANDI] ADIM 5: Avukatın Talimatına Göre "Sıfır Uydurma" Dilekçe Yazım ve Strateji Anlatım Motoru (`petition_drafter.py`)
+  - Oluşturulacak Dosya: petition_drafter.py
+  - Yapılacaklar:
+    * Yüklü dosyaya cevaben veya avukatın verdiği vakıa/strateji talimatına göre;
+      yalnızca dosyadaki gerçek verileri ve `precedent_fetcher.py` ile çekilmiş
+      gerçek kanun maddeleri + gerçek Esas/Karar numaralı Yargıtay/Danıştay kararlarını
+      kullanarak Türk hukuk usulüne uygun tam metin dilekçe yazan motor.
+    * Yazılan dilekçeyi resmi Word (`.docx`) formatında üretme ve yanında avukata
+      "👨‍⚖️ Neden Bu Hukuki Stratejiyi Kurduk?" raporunu madde madde sunma.
+
+[✅ TAMAMLANDI] ADIM 6: Dilekçe ve Resmi İçtihat Üzerinden Kanıtlı Hukuki Soru-Cevap Asistanı (`legal_chat.py`)
+  - Oluşturulacak Dosya: legal_chat.py
+  - Yapılacaklar:
+    * Avukatın sorduğu sorulara yüklü dilekçedeki paragrafları ve çekilen resmi
+      kararları kaynak göstererek (`[Yargıtay 9. HD, 2022/... E., 2023/... K.]`,
+      `[TBK m. 344]`) cevap veren, kaynakta yoksa asla uydurmayan interaktif soru-cevap motoru.
+
+[✅ TAMAMLANDI] ADIM 7: Görsel Avukat Denetim, Dilekçe Yazım ve Soru-Cevap Arayüzü (`app.py`, `baslat.bat`, `kurulum_yap.bat`, `.streamlit/config.toml`)
+  - Oluşturulacak Dosyalar: app.py, baslat.bat, kurulum_yap.bat, .streamlit/config.toml
+  - Yapılacaklar:
+    * 4 Ana Sekmeli Profesyonel Avukat Platformu:
+      1. `⚖️ 1. Dilekçe / Dava Dosyası Yükle ve Denetle` (Mod A: Kendi Dilekçemi Güçlendir | Mod B: Karşı Tarafın Dilekçesini Çürüt)
+      2. `✍️ 2. Kanıtlı Resmi Dilekçe Yazdır ve Strateji Oluştur` (Mahkemeye/Savcılığa hazır `.docx` dilekçe üretimi)
+      3. `🔍 3. Hukuki Sorundan / Cümleden Gerçek Emsal Karar Bul` (Dosya yüklemeden anlık içtihat & mevzuat bulucu)
+      4. `💬 4. Dosya & İçtihat Soru-Cevap Asistanı ve Rapor İndir` (Hakem Notlu `.docx`, Excel, Markdown, `.json` Canlı Otomatik Kayıt)
+
+[✅ TAMAMLANDI] ADIM 8: Sol Yan Menülü (Sidebar Navigation) ve Alt Menülü (Sub-menu) Modern, Sade Avukat Arayüzü (`app.py`)
+  - Yapılanlar:
+    * Üstteki kalabalık yatay sekmeler kaldırılarak sol tarafta her zaman açık (`expanded`),
+      şık çerçeveli Ana Menü ve seçilen menüye göre değişen Alt Menü (`1.1`, `1.2`, `1.3`,
+      `2.1`, `2.2`, `3.1`, `4.1`, `4.2`) navigasyon mimarisi kuruldu.
+    * Her alt menüde yalnızca ilgili adımın ferah kartı gösterilerek uzun sayfa kaydırma
+      karmaşası giderildi ve adımlar arası tek tıkla geçiş (`navigate_to`) butonları eklendi.
+
+[✅ TAMAMLANDI] ADIM 9: Akordeon Ağaç (Tree-Menu `▾`/`▸`) Sol Yan Menü ve Kurumsal LegalTech Kokpit Tasarımı (`app.py`)
+  - Yapılanlar:
+    * Sol yan menüdeki ilkel `st.radio` yuvarlakları tamamen kaldırıldı; tıklanan Ana Menünün
+      hemen kendi altında `▾` aşağı okla girintili (`↳` / `●`) alt menü butonlarının açıldığı,
+      diğer ana menülerin `▸` sağ okla kapalı durduğu gerçek Akordeon Ağaç Menü mimarisi kuruldu.
+    * Üst başlığın kesilmesini önleyen `padding-top: 2.9rem` ve cam efektli (glassmorphism)
+      Kurumsal LegalTech Hero Banner (`legal-hero-card`) eklendi.
+    * İki satıra taşan uzun `st.segmented_control` metinleri kaldırılarak yan yana 2 interaktif
+      "Avukat Çalışma Modu Seçim Kartı" (`MOD B` ve `MOD A`) ile tek satırda tam sığan kısa
+      dosya giriş sekmeleri tasarlandı.
+
+[✅ TAMAMLANDI] ADIM 10: Adım Adım Yönlendirmeli (Guided Wizard) Akıllı Karşılama ve Rehberli İş Akışı (`app.py`)
+  - Yapılanlar:
+    * İlk açılışta kullanıcıyı kalabalık menülerle boğmak yerine, iki büyük ve net başlangıç
+      kartı sunan "👋 Hoş Geldiniz! Bugün Nasıl Çalışmak İstersiniz?" ekranı (`HOME`) eklendi:
+      1) "📄 Elimde Bir Dilekçe veya Dava Dosyası Var (İncele, Sahte Kararları Yakala ve Cevap Yaz)"
+      2) "💬 Doğrudan Yapay Zekâ ile Sohbet Et / Emsal Bul / Sıfırdan Dilekçe Yazdır"
+    * Dosya inceleme yolu (`DOC_FLOW`) seçildiğinde kullanıcıyı adım adım (`ADIM 1 / 5` -> `ADIM 2 / 5`
+      -> `ADIM 3 / 5` -> `ADIM 4 / 5` -> `ADIM 5 / 5`) elinden tutarak yönlendiren sihirbaz kuruldu.
+    * Sol yan menüde henüz ulaşılmamış adımlar kilitli (`🔒`), tamamlanan adımlar onaylı (`✅`) ve
+      mevcut adım aktif (`●`) olarak gösterilerek kafa karışıklığı tamamen ortadan kaldırıldı.
+
+[✅ TAMAMLANDI] ADIM 11: Başlangıçta Sıfır Sol Menü, Seçime Göre Tekil Menü ve Mükerrer Butonların Kaldırılması (`app.py`)
+  - Yapılanlar:
+    * Başlangıç ekranında (`HOME`) sol menü (sidebar) tamamen gizlendi (`display: none`).
+    * Seçim yapıldıktan sonra sol menüde yalnızca seçilen akışın (ve yalnızca kilidi açılmış
+      adımların) gösterilmesi sağlandı; diğer akışın menüleri gizlendi.
+    * Aynı işi yapan mükerrer/çift geçiş butonları kaldırılarak her adımda tek bir net
+      ileri aksiyon butonu bırakıldı.
+
+[✅ TAMAMLANDI] ADIM 12: Eşit Boyutlu Hover Animasyonlu Kartlar, Tek Satır Kalın Başlıklar ve Sade Kullanıcı Dili (`app.py`)
+  - Yapılanlar:
+    * Başlangıç ekranındaki iki seçim kartının yüksekliği (`height: 225px`, `flex-direction: column`)
+      birebir eşitlendi ve altlarındaki mavi butonların milimetrik aynı hizada durması sağlandı.
+    * Kart başlıkları tek satır, büyük ve kalın (`font-weight: 800`, `white-space: nowrap`)
+      hale getirildi ve üzerine gelindiğinde (`:hover`) yukarı doğru hareket + parlama efekti eklendi.
+    * Arayüzdeki tüm mühendislik/teknik ifadeler ("Sıfır Halüsinasyonlu", "ChatGPT", "Kural E",
+      "90sn timeout") kaldırılarak sade ve anlaşılır avukat diline ("⚖️ AVUKAT ASİSTANI" vb.) çevrildi.
+
+[✅ TAMAMLANDI] ADIM 13: Alttaki Butonların Kaldırılıp Kartların Doğrudan Tıklanabilir ve Daha Uzun (`325px`) Hale Getirilmesi (`app.py`)
+  - Yapılanlar:
+    * Başlangıç ekranındaki kartların altında ayrı duran mavi butonlar tamamen kaldırıldı.
+    * İki kartın bizzat kendisi doğrudan tıklanabilir (`st.button` + özel kart CSS) hale getirildi;
+      kartın herhangi bir yerine tıklandığında doğrudan ilgili çalışma akışına yönlendiriyor.
+    * Kartların yüksekliği `325px`'e çıkarılarak içerideki maddelerin kart dışına taşması tamamen önlendi.
+
+[✅ TAMAMLANDI] ADIM 14: Dosya Yükleme Sayfasının Tıklanabilir Hover Kartlarla ve Modern Dropzone ile Yenilenmesi (`app.py`)
+  - Yapılanlar:
+    * Dosya yükleme sayfasındaki küçük amaç seçici haplar kaldırılarak tıpkı ilk sayfadaki
+      gibi doğrudan tıklanabilir, eşit boyda (`175px`), üzerine gelince yükselen ve seçili olanın
+      mavi çerçeveyle parladığı 2 büyük kart (`🛡️ Karşı Tarafın Dilekçesi / İddianame` ve
+      `✍️ Kendi Taslak Dilekçem`) yerleştirildi.
+    * Dosya sürükle-bırak alanı (`stFileUploaderDropzone`) kesikli mavi çerçeve ve hover
+      efektiyle modernleştirildi.
+    * Sol yan menüde henüz dosya yüklenmemişken tek başına duran `1. Dosya Yükle` butonu
+      gizlenerek yalnız dosya yüklendikten sonra adım geçişlerinin açılması sağlandı.
+
+[✅ TAMAMLANDI] ADIM 15: Projenin Git ile Versiyonlanması ve GitHub (`hukuk-asistani`) Reposuna Tam Yedeklenmesi
+  - Yapılanlar:
+    * `hukuk_asistani` klasöründe Git deposu başlatıldı ve hiçbir proje dosyası hariç
+      tutulmadan tüm modüller, yapılandırmalar, `.cache`, `raporlar` ve `yol_haritasi.txt`
+      GitHub (`hukuk-asistani`) reposuna push edildi.
+    * BÖLÜM 0 kurallarına her adımda otomatik GitHub `commit & push` zorunluluğu eklendi.
+================================================================================
