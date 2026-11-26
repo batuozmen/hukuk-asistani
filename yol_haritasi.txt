@@ -370,4 +370,9 @@ BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
   - Yapılanlar:
     * `div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button` seçicisi alt çekmecedeki `Kaydı Aç` butonunu da 185px yüksekliğinde dev bir karta dönüştürdüğü için, kart CSS'i yalnızca `.st-key-card_pick_mod_b` ve `.st-key-card_pick_mod_a` anahtarlarına sınırlandırıldı.
     * `.st-key-btn_open_saved_session` (`Kaydı Aç`) butonu, hemen yanındaki `Upload` butonu ve `Selectbox` ile aynı kompakt yüksekliğe (`2.55rem`) ve mavi çerçeveli kurumsal buton tasarımına kavuşturuldu.
+
+[✅ TAMAMLANDI] ADIM 25: GitHub İçin Mimari Şemalı (Mermaid) ve Karşılaştırmalı Tablolu Kurumsal `README.md` Dosyasının Oluşturulması
+  - Yapılanlar:
+    * `README.md` dosyası oluşturuldu; Mermaid `flowchart TD` (5 katmanlı genel sistem mimarisi) ve `sequenceDiagram` (6 kanallı şelale içtihat doğrulama akışı) diyagramları eklendi.
+    * Modül görev dağılımı, desteklenen 8 hukuk dalı ve usul kontrolleri, 4'lü denetim karar sınıflandırması, `.udf`/`.docx`/`.pdf` dosya formatları ve `ornek_dilekceler/` test rehberi detaylı tablolarla belgelendi.
 ================================================================================
