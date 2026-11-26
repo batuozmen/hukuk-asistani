@@ -209,8 +209,9 @@ home_cards_css = (
 
 step1_cards_css = (
     """
-    /* ADIM 1: İnceleme Amacı Seçim Kartları — Ortak Kart Yapısı (Hem Dark hem Light modda %100 opak ve yüksek kontrastlı!) */
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button {
+    /* ADIM 1: Yalnızca Üstteki 2 İnceleme Amacı Seçim Kartı (.st-key-card_pick_mod_b ve .st-key-card_pick_mod_a) */
+    .st-key-card_pick_mod_b button,
+    .st-key-card_pick_mod_a button {
         border-radius: 16px !important;
         padding: 1.45rem 1.55rem !important;
         min-height: 185px !important;
@@ -227,30 +228,36 @@ step1_cards_css = (
                     background 0.22s ease !important;
         cursor: pointer !important;
     }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="secondary"] {
+    .st-key-card_pick_mod_b button[kind="secondary"],
+    .st-key-card_pick_mod_a button[kind="secondary"] {
         background: linear-gradient(155deg, rgba(15, 23, 42, 0.94) 0%, rgba(11, 15, 25, 0.98) 100%) !important;
         border: 1.5px solid rgba(148, 163, 184, 0.24) !important;
         box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.35) !important;
     }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="primary"] {
+    .st-key-card_pick_mod_b button[kind="primary"],
+    .st-key-card_pick_mod_a button[kind="primary"] {
         background: linear-gradient(155deg, #1E3A8A 0%, #0F172A 100%) !important;
         border: 2px solid #60A5FA !important;
         box-shadow: 0 0 28px -4px rgba(59, 130, 246, 0.48), 0 10px 24px -6px rgba(15, 23, 42, 0.65) !important;
     }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button:hover {
+    .st-key-card_pick_mod_b button:hover,
+    .st-key-card_pick_mod_a button:hover {
         transform: translateY(-5px) !important;
         border-color: #93C5FD !important;
         box-shadow: 0 14px 32px -6px rgba(59, 130, 246, 0.45) !important;
     }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button > div,
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button div[data-testid="stMarkdownContainer"] {
+    .st-key-card_pick_mod_b button > div,
+    .st-key-card_pick_mod_a button > div,
+    .st-key-card_pick_mod_b button div[data-testid="stMarkdownContainer"],
+    .st-key-card_pick_mod_a button div[data-testid="stMarkdownContainer"] {
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
         width: 100% !important;
         text-align: left !important;
     }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p {
+    .st-key-card_pick_mod_b button p,
+    .st-key-card_pick_mod_a button p {
         display: block !important;
         width: 100% !important;
         text-align: left !important;
@@ -263,8 +270,8 @@ step1_cards_css = (
         color: #CBD5E1 !important;
         margin: 0 !important;
     }
-    /* Başlığı <code> etiketiyle yakalayıp %100 tam satır kalın başlık ve alt çizgi yapıyoruz! */
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p code {
+    .st-key-card_pick_mod_b button p code,
+    .st-key-card_pick_mod_a button p code {
         display: block !important;
         width: 100% !important;
         background: transparent !important;
@@ -280,6 +287,24 @@ step1_cards_css = (
         border-radius: 0 !important;
         padding: 0 0 0.58rem 0 !important;
         margin: 0 0 0.7rem 0 !important;
+    }
+    /* Kaydı Aç butonu yanındaki Upload butonu ve Selectbox ile birebir aynı boyutta ve stilde olsun */
+    .st-key-btn_open_saved_session button {
+        min-height: 2.55rem !important;
+        height: 2.55rem !important;
+        padding: 0.45rem 0.95rem !important;
+        border-radius: 8px !important;
+        background-color: rgba(30, 58, 138, 0.65) !important;
+        border: 1px solid #60A5FA !important;
+        color: #FFFFFF !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: none !important;
+    }
+    .st-key-btn_open_saved_session button:hover {
+        background-color: rgba(37, 99, 235, 0.82) !important;
+        border-color: #93C5FD !important;
     }
     """
     if (wizard_track == "DOC_FLOW" and doc_step == 1)
@@ -1110,7 +1135,12 @@ elif wizard_track == "DOC_FLOW":
                                 options=list(session_labels.keys()),
                             )
                         with btn_c:
-                            if st.button(":material/folder_open: Kaydı Aç ➡️", type="primary", width="stretch"):
+                            if st.button(
+                                ":material/folder_open: Kaydı Aç",
+                                key="btn_open_saved_session",
+                                type="primary",
+                                width="stretch",
+                            ):
                                 sf_path = session_labels[chosen_saved_label]
                                 p_doc, c_map, cp_map, s_map, v_res, l_mode, s_at = deserialize_legal_session_bytes(
                                     sf_path.read_bytes()

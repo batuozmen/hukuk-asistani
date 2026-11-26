@@ -365,4 +365,9 @@ BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
     * Tüm `st.code(...)` bileşenlerine `wrap_lines=True` eklendi ve global CSS'te `pre, code, stCodeBlock, stMarkdownContainer, stButton, textarea` için `white-space: pre-wrap !important; overflow-wrap: anywhere !important; word-break: break-word !important; overflow-x: hidden !important;` tanımlandı.
     * Adım 2'deki yatay kaydırma çubuğu çıkaran `st.data_editor` ve Adım 5'teki `st.dataframe` kaldırılarak yerlerine her paragrafın tam metnini alt satıra sararak gösteren, sağa-sola asla kaymayan tam genişlikli modern kart listesi yerleştirildi.
     * Tüm kart başlıklarındaki ve `.precedent-card-header` içindeki `white-space: nowrap` kaldırılarak `white-space: normal !important` ve esnek yükseklik (`height: auto !important`) tanımlandı.
+
+[✅ TAMAMLANDI] ADIM 24: "Kaydı Aç" Butonunun Dev Kart CSS'inden Ayrılıp Yanındaki Upload Butonuyla Aynı Kompakt Boyuta Getirilmesi (`app.py`)
+  - Yapılanlar:
+    * `div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button` seçicisi alt çekmecedeki `Kaydı Aç` butonunu da 185px yüksekliğinde dev bir karta dönüştürdüğü için, kart CSS'i yalnızca `.st-key-card_pick_mod_b` ve `.st-key-card_pick_mod_a` anahtarlarına sınırlandırıldı.
+    * `.st-key-btn_open_saved_session` (`Kaydı Aç`) butonu, hemen yanındaki `Upload` butonu ve `Selectbox` ile aynı kompakt yüksekliğe (`2.55rem`) ve mavi çerçeveli kurumsal buton tasarımına kavuşturuldu.
 ================================================================================
