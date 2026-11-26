@@ -128,12 +128,128 @@ hide_sidebar_css = (
     """
 )
 
-st.html(
+home_cards_css = (
+    """
+    .stButton > button {
+        background: linear-gradient(155deg, rgba(30, 41, 59, 0.82) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
+        border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
+        border-radius: 18px !important;
+        padding: 1.9rem 1.85rem !important;
+        min-height: 325px !important;
+        height: 325px !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                    border-color 0.22s ease,
+                    box-shadow 0.22s ease,
+                    background 0.22s ease !important;
+        cursor: pointer !important;
+        box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.35) !important;
+    }
+    .stButton > button:hover {
+        transform: translateY(-6px) !important;
+        border-color: #60A5FA !important;
+        box-shadow: 0 18px 38px -8px rgba(37, 99, 235, 0.42) !important;
+        background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+    }
+    .stButton > button div[data-testid="stMarkdownContainer"] {
+        width: 100% !important;
+        text-align: left !important;
+    }
+    .stButton > button p {
+        text-align: left !important;
+        white-space: pre-line !important;
+        line-height: 1.72 !important;
+        font-size: 0.93rem !important;
+        font-weight: 400 !important;
+        color: #E2E8F0 !important;
+        margin: 0 !important;
+    }
+    .stButton > button p strong {
+        display: block !important;
+        font-size: 1.25rem !important;
+        font-weight: 800 !important;
+        color: #FFFFFF !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
+        padding-bottom: 0.72rem !important;
+        margin-bottom: 0.85rem !important;
+        width: 100% !important;
+    }
+    """
+    if wizard_track == "HOME"
+    else ""
+)
+
+step1_cards_css = (
+    """
+    .block-container .stButton > button {
+        background: linear-gradient(155deg, rgba(30, 41, 59, 0.82) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
+        border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
+        border-radius: 16px !important;
+        padding: 1.45rem 1.55rem !important;
+        min-height: 185px !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                    border-color 0.22s ease,
+                    box-shadow 0.22s ease,
+                    background 0.22s ease !important;
+        cursor: pointer !important;
+        box-shadow: 0 8px 22px -6px rgba(0, 0, 0, 0.32) !important;
+    }
+    .block-container .stButton > button:hover {
+        transform: translateY(-5px) !important;
+        border-color: #60A5FA !important;
+        box-shadow: 0 16px 34px -8px rgba(37, 99, 235, 0.42) !important;
+        background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+    }
+    .block-container .stButton > button div[data-testid="stMarkdownContainer"] {
+        width: 100% !important;
+        text-align: left !important;
+    }
+    .block-container .stButton > button p {
+        text-align: left !important;
+        white-space: pre-line !important;
+        line-height: 1.58 !important;
+        font-size: 0.92rem !important;
+        font-weight: 400 !important;
+        color: #CBD5E1 !important;
+        margin: 0 !important;
+    }
+    .block-container .stButton > button p strong {
+        display: block !important;
+        font-size: 1.15rem !important;
+        font-weight: 800 !important;
+        color: #FFFFFF !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
+        padding-bottom: 0.58rem !important;
+        margin-bottom: 0.72rem !important;
+        width: 100% !important;
+    }
+    """
+    if (wizard_track == "DOC_FLOW" and doc_step == 1)
+    else ""
+)
+
+st.markdown(
     f"""
     <style>
     {hide_sidebar_css}
 
-    /* Üst Rehber Başlık Kartı */
     .guide-banner {{
         background: linear-gradient(135deg, rgba(30, 58, 138, 0.42) 0%, rgba(15, 23, 42, 0.94) 100%);
         border: 1px solid rgba(59, 130, 246, 0.35);
@@ -166,128 +282,9 @@ st.html(
         line-height: 1.45;
     }}
 
-    /* Karşılama Ekranı: Yalnızca HOME ekranındaki kart butonlarını uzun ve tıklanabilir kart yap */
-    """
-    + (
-        """
-    div[data-testid="stHorizontalBlock"] .stButton > button {
-        background: linear-gradient(155deg, rgba(30, 41, 59, 0.82) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
-        border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
-        border-radius: 18px !important;
-        padding: 1.9rem 1.85rem !important;
-        min-height: 310px !important;
-        height: 310px !important;
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        text-align: left !important;
-        transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-                    border-color 0.22s ease,
-                    box-shadow 0.22s ease,
-                    background 0.22s ease !important;
-        cursor: pointer !important;
-        box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.35) !important;
-    }
-    div[data-testid="stHorizontalBlock"] .stButton > button:hover {
-        transform: translateY(-6px) !important;
-        border-color: #60A5FA !important;
-        box-shadow: 0 18px 38px -8px rgba(37, 99, 235, 0.42) !important;
-        background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
-    }
-    div[data-testid="stHorizontalBlock"] .stButton > button div[data-testid="stMarkdownContainer"] {
-        width: 100% !important;
-        text-align: left !important;
-    }
-    div[data-testid="stHorizontalBlock"] .stButton > button p {
-        text-align: left !important;
-        white-space: pre-line !important;
-        line-height: 1.72 !important;
-        font-size: 0.93rem !important;
-        font-weight: 400 !important;
-        color: #CBD5E1 !important;
-        margin: 0 !important;
-    }
-    /* Streamlit tek <p> üretse bile <strong> başlığı ayrı bir üst blok ve çizgili başlık olur! */
-    div[data-testid="stHorizontalBlock"] .stButton > button p strong {
-        display: block !important;
-        font-size: 1.24rem !important;
-        font-weight: 800 !important;
-        color: #FFFFFF !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
-        padding-bottom: 0.65rem !important;
-        margin-bottom: 0.75rem !important;
-        width: 100% !important;
-    }
-    """
-        if wizard_track == "HOME"
-        else ""
-    )
-    + (
-        """
-    /* ADIM 1: İnceleme Amacı Seçim Kartları (Her ikisi de aynı parlaklıkta, başlık ayrı blokta ve hover hareketli) */
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button {
-        background: linear-gradient(155deg, rgba(30, 41, 59, 0.82) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
-        border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
-        border-radius: 16px !important;
-        padding: 1.45rem 1.55rem !important;
-        min-height: 175px !important;
-        height: 175px !important;
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        text-align: left !important;
-        transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-                    border-color 0.22s ease,
-                    box-shadow 0.22s ease,
-                    background 0.22s ease !important;
-        cursor: pointer !important;
-        box-shadow: 0 8px 22px -6px rgba(0, 0, 0, 0.32) !important;
-    }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button:hover {
-        transform: translateY(-5px) !important;
-        border-color: #60A5FA !important;
-        box-shadow: 0 16px 34px -8px rgba(37, 99, 235, 0.42) !important;
-        background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
-    }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button div[data-testid="stMarkdownContainer"] {
-        width: 100% !important;
-        text-align: left !important;
-    }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p {
-        text-align: left !important;
-        white-space: pre-line !important;
-        line-height: 1.58 !important;
-        font-size: 0.91rem !important;
-        font-weight: 400 !important;
-        color: #CBD5E1 !important;
-        margin: 0 !important;
-    }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p strong {
-        display: block !important;
-        font-size: 1.15rem !important;
-        font-weight: 800 !important;
-        color: #FFFFFF !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
-        padding-bottom: 0.55rem !important;
-        margin-bottom: 0.65rem !important;
-        width: 100% !important;
-    }
-    """
-        if (wizard_track == "DOC_FLOW" and doc_step == 1)
-        else ""
-    )
-    + f"""
-    /* Segmented Control Seçili Sekme Yazısını Parlak Beyaz Yap (Koyu Mavi Okunaksızlığını Gider) */
+    {home_cards_css}
+    {step1_cards_css}
+
     div[data-baseweb="button-group"] button[aria-pressed="true"],
     div[data-baseweb="button-group"] button[aria-checked="true"] {{
         background-color: rgba(37, 99, 235, 0.35) !important;
@@ -299,7 +296,6 @@ st.html(
         font-weight: 600 !important;
     }}
 
-    /* Dosya Yükleme (Dropzone) ve Segmented Control Modernizasyonu */
     section[data-testid="stFileUploaderDropzone"] {{
         border: 2px dashed rgba(59, 130, 246, 0.48) !important;
         border-radius: 14px !important;
@@ -313,7 +309,6 @@ st.html(
         transform: translateY(-2px) !important;
     }}
 
-    /* ADIM 16: Tüm Sayfalardaki Çerçeveli Kartlar, Metrik Kutuları ve Expanderlar İçin Hover & Glassmorphism */
     div[data-testid="stVerticalBlockBorderWrapper"] {{
         background: linear-gradient(155deg, rgba(30, 41, 59, 0.58) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
         border: 1px solid rgba(96, 165, 250, 0.24) !important;
@@ -325,7 +320,6 @@ st.html(
         box-shadow: 0 10px 26px -8px rgba(37, 99, 235, 0.25) !important;
     }}
 
-    /* Metrik Kutuları (Adım 2 ve Adım 3 Sayaçları) */
     div[data-testid="stMetric"] {{
         padding: 0.25rem 0.2rem !important;
     }}
@@ -334,22 +328,6 @@ st.html(
         color: #F8FAFC !important;
     }}
 
-    /* Örnek Hukuk Sorusu Kart Butonları ve İndirme/Geçiş Butonları Hover Efekti */
-    .block-container .stButton > button,
-    .block-container .stDownloadButton > button {{
-        border-radius: 11px !important;
-        font-weight: 600 !important;
-        transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
-                    border-color 0.18s ease,
-                    box-shadow 0.18s ease !important;
-    }}
-    .block-container .stButton > button:hover,
-    .block-container .stDownloadButton > button:hover {{
-        transform: translateY(-3px) !important;
-        box-shadow: 0 10px 22px -6px rgba(37, 99, 235, 0.35) !important;
-    }}
-
-    /* Emsal Karar Sonuç Kartı Başlığı */
     .precedent-card-header {{
         font-size: 1.08rem;
         font-weight: 800;
@@ -362,7 +340,6 @@ st.html(
         margin-bottom: 0.55rem;
     }}
 
-    /* Sol Menü Marka Kartı */
     .sidebar-brand-card {{
         background: linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%);
         border: 1px solid rgba(96, 165, 250, 0.35);
@@ -382,7 +359,8 @@ st.html(
         margin: 0.14rem 0 0 0;
     }}
     </style>
-    """
+    """,
+    unsafe_allow_html=True,
 )
 
 
@@ -743,14 +721,15 @@ def start_ai_flow(tool: str = "CHAT") -> None:
 
 
 def render_guide_banner(step_badge: str, title: str, desc: str) -> None:
-    st.html(
+    st.markdown(
         f"""
         <div class="guide-banner">
             <span class="guide-step-badge">{step_badge}</span>
             <p class="guide-title">{title}</p>
             <p class="guide-desc">{desc}</p>
         </div>
-        """
+        """,
+        unsafe_allow_html=True,
     )
 
 
@@ -878,7 +857,7 @@ if wizard_track == "HOME":
     with col_w1:
         card_1_md = (
             "**📄 Dilekçe ve Dava Dosyası İncele**"
-            "Mevcut bir dilekçeyi, iddianameyi veya dava dosyasını yükleyerek hukuki denetim yapın ve cevap hazırlayın.\n"
+            "Mevcut bir dilekçeyi, iddianameyi veya dava dosyasını yükleyerek hukuki denetim yapın ve cevap hazırlayın.\n\n"
             "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder\n"
             "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar\n"
             "✅ Emsal kararlarla güçlendirilmiş Cevap Dilekçesi (.docx) hazırlar"
@@ -889,7 +868,7 @@ if wizard_track == "HOME":
     with col_w2:
         card_2_md = (
             "**💬 Hukuk Asistanına Sor & Dilekçe Yaz**"
-            "Dosya yüklemeden doğrudan hukuki sorularınıza yanıt alın, emsal karar arayın veya sıfırdan dilekçe yazdırın.\n"
+            "Dosya yüklemeden doğrudan hukuki sorularınıza yanıt alın, emsal karar arayın veya sıfırdan dilekçe yazdırın.\n\n"
             "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap\n"
             "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama\n"
             "✅ Olay özetinizden mahkemeye hazır resmi Word (.docx) dilekçe"
