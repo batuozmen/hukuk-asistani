@@ -359,4 +359,10 @@ BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
       Borçlar & Kira Hukuku (`2_Kira_Tespit_ve_Tahliye_Taslak_Dilekce`) ve Ceza Hukuku
       (`3_Ceza_Savcilik_Sikayet_Dolandiricilik`) alanlarında hem UYAP `.udf` hem Word `.docx`
       formatında toplam 6 adet test dilekçesi oluşturuldu ve doğrulandı.
+
+[✅ TAMAMLANDI] ADIM 23: Tüm Sayfalarda ve Bölümlerde Sağa-Sola (Yatay) Kaydırmanın (Horizontal Scroll) Kaldırılıp Tüm Metinlerin Alt Satıra Geçirilmesi (`app.py`)
+  - Yapılanlar:
+    * Tüm `st.code(...)` bileşenlerine `wrap_lines=True` eklendi ve global CSS'te `pre, code, stCodeBlock, stMarkdownContainer, stButton, textarea` için `white-space: pre-wrap !important; overflow-wrap: anywhere !important; word-break: break-word !important; overflow-x: hidden !important;` tanımlandı.
+    * Adım 2'deki yatay kaydırma çubuğu çıkaran `st.data_editor` ve Adım 5'teki `st.dataframe` kaldırılarak yerlerine her paragrafın tam metnini alt satıra sararak gösteren, sağa-sola asla kaymayan tam genişlikli modern kart listesi yerleştirildi.
+    * Tüm kart başlıklarındaki ve `.precedent-card-header` içindeki `white-space: nowrap` kaldırılarak `white-space: normal !important` ve esnek yükseklik (`height: auto !important`) tanımlandı.
 ================================================================================

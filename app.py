@@ -143,7 +143,7 @@ home_cards_css = (
         border-radius: 18px !important;
         padding: 1.85rem 1.85rem !important;
         min-height: 325px !important;
-        height: 325px !important;
+        height: auto !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
@@ -176,6 +176,8 @@ home_cards_css = (
         width: 100% !important;
         text-align: left !important;
         white-space: pre-line !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
         line-height: 1.65 !important;
         font-size: 0.92rem !important;
         font-weight: 400 !important;
@@ -191,9 +193,9 @@ home_cards_css = (
         font-size: 1.24rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
         border: none !important;
         border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
         border-radius: 0 !important;
@@ -212,7 +214,7 @@ step1_cards_css = (
         border-radius: 16px !important;
         padding: 1.45rem 1.55rem !important;
         min-height: 185px !important;
-        height: 185px !important;
+        height: auto !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
@@ -253,6 +255,8 @@ step1_cards_css = (
         width: 100% !important;
         text-align: left !important;
         white-space: pre-line !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
         line-height: 1.58 !important;
         font-size: 0.92rem !important;
         font-weight: 400 !important;
@@ -268,9 +272,9 @@ step1_cards_css = (
         font-size: 1.16rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
         border: none !important;
         border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
         border-radius: 0 !important;
@@ -286,10 +290,45 @@ st.markdown(
     f"""
     <style>
     /* İşletim sistemi veya tarayıcı Light Mode'a alınsa bile kurumsal gece mavisi (Dark) temayı %100 koru! */
-    :root, html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {{
+    :root, html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"], .main, .block-container {{
         background-color: #0B0F19 !important;
         color: #F8FAFC !important;
         color-scheme: dark !important;
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+    }}
+    /* HİÇBİR SAYFADA VE BÖLÜMDE SAĞA-SOLA (YATAY) SCROLL OLMASIN; UZAYAN TÜM METİNLER ALT SATIRA GEÇSİN! */
+    pre, code,
+    div[data-testid="stCodeBlock"],
+    div[data-testid="stCodeBlock"] pre,
+    div[data-testid="stCodeBlock"] code,
+    div[data-testid="stCode"],
+    div[data-testid="stCode"] pre,
+    div[data-testid="stCode"] code,
+    div[data-testid="stMarkdownContainer"] pre,
+    div[data-testid="stMarkdownContainer"] code,
+    div[data-testid="stMarkdownContainer"] p,
+    div[data-testid="stMarkdownContainer"] li,
+    div[data-testid="stCaptionContainer"] p,
+    div[data-testid="stAlert"] p,
+    div[data-testid="stExpander"] summary,
+    div[data-testid="stExpander"] summary p,
+    .stButton > button,
+    .stButton > button p,
+    .stDownloadButton > button,
+    .stDownloadButton > button p {{
+        white-space: pre-wrap !important;
+        overflow-wrap: anywhere !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+    }}
+    textarea {{
+        white-space: pre-wrap !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
+        overflow-x: hidden !important;
     }}
     section[data-testid="stSidebar"],
     section[data-testid="stSidebar"] > div {{
@@ -423,9 +462,9 @@ st.markdown(
         font-size: 1.08rem;
         font-weight: 800;
         color: #FFFFFF;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
         border-bottom: 1px solid rgba(148, 163, 184, 0.18);
         padding-bottom: 0.45rem;
         margin-bottom: 0.55rem;
@@ -1269,8 +1308,18 @@ elif wizard_track == "DOC_FLOW":
 
             verified_by_id = {r.claim_id: r for r in cur_res}
             selected_set: set[int] = set(st.session_state.get("selected_claim_indices", set()))
+            ver_token = st.session_state.get("editor_ver", 0)
 
-            table_rows: List[Dict[str, Any]] = []
+            def _toggle_single_claim_cb(idx_num: int, cb_key: str) -> None:
+                cur_s = set(st.session_state.get(f"sel_{cur_mk}", set()))
+                if st.session_state.get(cb_key):
+                    cur_s.add(idx_num)
+                else:
+                    cur_s.discard(idx_num)
+                st.session_state[f"sel_{cur_mk}"] = cur_s
+                st.session_state["selected_claim_indices"] = set(cur_s)
+
+            current_checked_indices: set[int] = set()
             for idx_cl, cl in enumerate(parsed_doc.claims, start=1):
                 existing_r = verified_by_id.get(cl.claim_id)
                 status_lbl = (
@@ -1278,52 +1327,31 @@ elif wizard_track == "DOC_FLOW":
                     if existing_r
                     else "⏳ İncelemeye Hazır"
                 )
-                refs_combined = ", ".join(cl.related_statutes + cl.related_precedents) or "-"
-                table_rows.append(
-                    {
-                        "Seç": idx_cl in selected_set,
-                        "No": idx_cl,
-                        "Bölüm": cl.section_name,
-                        "Tür": cl.claim_category,
-                        "Durum": status_lbl,
-                        "Kanun / Karar Atfı": refs_combined,
-                        "Dilekçe Paragrafı": cl.claim_text,
-                    }
-                )
+                refs_combined = ", ".join(cl.related_statutes + cl.related_precedents) or "Genel Hukuki Değerlendirme"
+                cb_k = f"claim_cb_{cur_mk}_{ver_token}_{idx_cl}"
+                if cb_k not in st.session_state:
+                    st.session_state[cb_k] = idx_cl in selected_set
 
-            df_claims = pd.DataFrame(table_rows)
-            editor_key = f"claims_editor_{cur_mk}_{st.session_state.get('editor_ver', 0)}"
-            edited_df = st.data_editor(
-                df_claims,
-                key=editor_key,
-                hide_index=True,
-                width="stretch",
-                row_height=50,
-                disabled=[
-                    "No",
-                    "Bölüm",
-                    "Tür",
-                    "Durum",
-                    "Kanun / Karar Atfı",
-                    "Dilekçe Paragrafı",
-                ],
-                column_config={
-                    "Seç": st.column_config.CheckboxColumn("Seç", width="small"),
-                    "No": st.column_config.NumberColumn("No", width="small"),
-                    "Bölüm": st.column_config.TextColumn("Bölüm", width="medium"),
-                    "Tür": st.column_config.TextColumn("Tür", width="small"),
-                    "Durum": st.column_config.TextColumn("Durum", width="medium"),
-                    "Kanun / Karar Atfı": st.column_config.TextColumn("Kanun / Karar Atfı", width="medium"),
-                    "Dilekçe Paragrafı": st.column_config.TextColumn(
-                        "Dilekçe Paragrafı",
-                        width="large",
-                    ),
-                },
-            )
+                with st.container(border=True):
+                    c_chk, c_txt = st.columns([0.06, 0.94], vertical_alignment="top")
+                    with c_chk:
+                        is_chk = st.checkbox(
+                            f"#{idx_cl}",
+                            key=cb_k,
+                            label_visibility="collapsed",
+                            on_change=_toggle_single_claim_cb,
+                            args=(idx_cl, cb_k),
+                        )
+                        if is_chk:
+                            current_checked_indices.add(idx_cl)
+                    with c_txt:
+                        st.markdown(
+                            f"**Paragraf {idx_cl}** &nbsp;|&nbsp; `{cl.section_name}` &nbsp;|&nbsp; "
+                            f"**Tür:** {cl.claim_category} &nbsp;|&nbsp; **Durum:** {status_lbl} &nbsp;|&nbsp; "
+                            f"**Atıflar:** `{refs_combined}`"
+                        )
+                        st.write(cl.claim_text)
 
-            current_checked_indices = {
-                int(row["No"]) for _, row in edited_df.iterrows() if bool(row["Seç"])
-            }
             st.session_state["selected_claim_indices"] = current_checked_indices
             st.session_state[f"sel_{cur_mk}"] = set(current_checked_indices)
 
@@ -1488,7 +1516,7 @@ elif wizard_track == "DOC_FLOW":
                     st.info(f"**🧭 Avukat Tavsiyesi:**  \n{r_item.lawyer_action_advice}")
 
                     st.markdown("**✍️ Dilekçenizde Kullanabileceğiniz Örnek Paragraf:**")
-                    st.code(r_item.draft_paragraph_suggestion, language="markdown")
+                    st.code(r_item.draft_paragraph_suggestion, language="markdown", wrap_lines=True)
 
                     d_col1, d_col2 = st.columns(2)
                     with d_col1:
@@ -1746,20 +1774,16 @@ elif wizard_track == "DOC_FLOW":
                                 st.markdown(f"- **{b_cit.source_type} — `{b_cit.reference_code}`:** {b_cit.quote_snippet[:350]}")
 
             with st.expander("📋 Tüm İnceleme Tablosunu Gör", expanded=False):
-                st.dataframe(
-                    df_export,
-                    hide_index=True,
-                    width="stretch",
-                    row_height=50,
-                    column_config={
-                        "Dilekçe Paragrafı": st.column_config.TextColumn(
-                            "Dilekçe Paragrafı", width="large"
-                        ),
-                        "Önerilen Dilekçe Paragrafı": st.column_config.TextColumn(
-                            "Önerilen Dilekçe Paragrafı", width="large"
-                        ),
-                    },
-                )
+                for r_ex in active_res_t4:
+                    v_inf = get_legal_verdict_info(r_ex.verdict)
+                    with st.container(border=True):
+                        st.markdown(
+                            f"**Paragraf {r_ex.paragraph_index}** (`{r_ex.section_name}` — {r_ex.claim_category}) "
+                            f"&nbsp;|&nbsp; **{v_inf['short_label']}** &nbsp;|&nbsp; **Karar:** `{r_ex.best_precedent_label}`"
+                        )
+                        st.markdown(f"**📄 Dilekçe Paragrafı:** {r_ex.claim_text}")
+                        st.markdown(f"**⚖️ Hukuki Değerlendirme:** {r_ex.legal_analysis}")
+                        st.markdown(f"**✍️ Önerilen Dilekçe Paragrafı:** {r_ex.draft_paragraph_suggestion}")
 
 
 # ===========================================================================
@@ -1881,6 +1905,7 @@ elif wizard_track == "AI_FLOW":
                         st.code(
                             f"Nitekim {fp.citation_label} sayılı ilamda da açıkça hüküm altına alındığı üzere; \"{fp.summary_principle}\"",
                             language="markdown",
+                            wrap_lines=True,
                         )
 
     elif ai_tool == "DRAFT":
