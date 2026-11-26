@@ -171,12 +171,12 @@ st.html(
     + (
         """
     div[data-testid="stHorizontalBlock"] .stButton > button {
-        background: linear-gradient(155deg, rgba(30, 41, 59, 0.78) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
-        border: 1.5px solid rgba(96, 165, 250, 0.32) !important;
+        background: linear-gradient(155deg, rgba(30, 41, 59, 0.82) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
+        border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
         border-radius: 18px !important;
         padding: 1.9rem 1.85rem !important;
-        min-height: 325px !important;
-        height: 325px !important;
+        min-height: 310px !important;
+        height: 310px !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
@@ -191,10 +191,10 @@ st.html(
         box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.35) !important;
     }
     div[data-testid="stHorizontalBlock"] .stButton > button:hover {
-        transform: translateY(-7px) !important;
+        transform: translateY(-6px) !important;
         border-color: #60A5FA !important;
         box-shadow: 0 18px 38px -8px rgba(37, 99, 235, 0.42) !important;
-        background: linear-gradient(155deg, rgba(30, 58, 138, 0.50) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+        background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
     }
     div[data-testid="stHorizontalBlock"] .stButton > button div[data-testid="stMarkdownContainer"] {
         width: 100% !important;
@@ -202,28 +202,26 @@ st.html(
     }
     div[data-testid="stHorizontalBlock"] .stButton > button p {
         text-align: left !important;
-        white-space: normal !important;
+        white-space: pre-line !important;
         line-height: 1.72 !important;
         font-size: 0.93rem !important;
-        color: #E2E8F0 !important;
-        margin: 0 0 0.65rem 0 !important;
+        font-weight: 400 !important;
+        color: #CBD5E1 !important;
+        margin: 0 !important;
     }
-    div[data-testid="stHorizontalBlock"] .stButton > button p:first-child {
-        font-size: 1.26rem !important;
+    /* Streamlit tek <p> üretse bile <strong> başlığı ayrı bir üst blok ve çizgili başlık olur! */
+    div[data-testid="stHorizontalBlock"] .stButton > button p strong {
+        display: block !important;
+        font-size: 1.24rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
         white-space: nowrap !important;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.22) !important;
-        padding-bottom: 0.75rem !important;
-        margin-bottom: 0.9rem !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
+        padding-bottom: 0.65rem !important;
+        margin-bottom: 0.75rem !important;
         width: 100% !important;
-    }
-    div[data-testid="stHorizontalBlock"] .stButton > button p:nth-child(2) {
-        color: #94A3B8 !important;
-        font-size: 0.92rem !important;
-        font-weight: 400 !important;
-        line-height: 1.5 !important;
-        margin-bottom: 1.05rem !important;
     }
     """
         if wizard_track == "HOME"
@@ -231,8 +229,10 @@ st.html(
     )
     + (
         """
-    /* ADIM 1: İnceleme Amacı Seçim Kartları (Doğrudan tıklanabilir, eşit boyda ve hover hareketli) */
+    /* ADIM 1: İnceleme Amacı Seçim Kartları (Her ikisi de aynı parlaklıkta, başlık ayrı blokta ve hover hareketli) */
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button {
+        background: linear-gradient(155deg, rgba(30, 41, 59, 0.82) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
+        border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
         border-radius: 16px !important;
         padding: 1.45rem 1.55rem !important;
         min-height: 175px !important;
@@ -248,23 +248,13 @@ st.html(
                     box-shadow 0.22s ease,
                     background 0.22s ease !important;
         cursor: pointer !important;
-    }
-    /* Seçili Olmayan (Secondary) Amaç Kartı */
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="secondary"] {
-        background: linear-gradient(155deg, rgba(30, 41, 59, 0.65) 0%, rgba(15, 23, 42, 0.92) 100%) !important;
-        border: 1.5px solid rgba(148, 163, 184, 0.24) !important;
-        box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.28) !important;
-    }
-    /* Seçili Olan (Primary) Amaç Kartı */
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="primary"] {
-        background: linear-gradient(155deg, rgba(37, 99, 235, 0.32) 0%, rgba(30, 58, 138, 0.65) 100%) !important;
-        border: 2px solid #3B82F6 !important;
-        box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.38) !important;
+        box-shadow: 0 8px 22px -6px rgba(0, 0, 0, 0.32) !important;
     }
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button:hover {
         transform: translateY(-5px) !important;
         border-color: #60A5FA !important;
         box-shadow: 0 16px 34px -8px rgba(37, 99, 235, 0.42) !important;
+        background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
     }
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button div[data-testid="stMarkdownContainer"] {
         width: 100% !important;
@@ -272,20 +262,24 @@ st.html(
     }
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p {
         text-align: left !important;
-        white-space: normal !important;
-        line-height: 1.55 !important;
-        font-size: 0.90rem !important;
+        white-space: pre-line !important;
+        line-height: 1.58 !important;
+        font-size: 0.91rem !important;
+        font-weight: 400 !important;
         color: #CBD5E1 !important;
         margin: 0 !important;
     }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p:first-child {
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p strong {
+        display: block !important;
         font-size: 1.15rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
         white-space: nowrap !important;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.22) !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
         padding-bottom: 0.55rem !important;
-        margin-bottom: 0.7rem !important;
+        margin-bottom: 0.65rem !important;
         width: 100% !important;
     }
     """
@@ -293,6 +287,18 @@ st.html(
         else ""
     )
     + f"""
+    /* Segmented Control Seçili Sekme Yazısını Parlak Beyaz Yap (Koyu Mavi Okunaksızlığını Gider) */
+    div[data-baseweb="button-group"] button[aria-pressed="true"],
+    div[data-baseweb="button-group"] button[aria-checked="true"] {{
+        background-color: rgba(37, 99, 235, 0.35) !important;
+        border-color: #3B82F6 !important;
+        color: #FFFFFF !important;
+    }}
+    div[data-baseweb="button-group"] button p {{
+        color: #F8FAFC !important;
+        font-weight: 600 !important;
+    }}
+
     /* Dosya Yükleme (Dropzone) ve Segmented Control Modernizasyonu */
     section[data-testid="stFileUploaderDropzone"] {{
         border: 2px dashed rgba(59, 130, 246, 0.48) !important;
@@ -826,8 +832,7 @@ if wizard_track != "HOME":
                     width="stretch",
                 ):
                     start_ai_flow(tool=t_code)
-
-        st.divider()
+            st.divider()
 
         with st.expander("⚙️ Ek Karar PDF & Ayarlar", expanded=False):
             uploaded_ictihat_pdfs = st.file_uploader(
@@ -872,10 +877,10 @@ if wizard_track == "HOME":
 
     with col_w1:
         card_1_md = (
-            "📄 Dilekçe ve Dava Dosyası İncele\n\n"
-            "Mevcut bir dilekçeyi, iddianameyi veya dava dosyasını yükleyerek hukuki denetim yapın ve cevap hazırlayın.\n\n"
-            "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder  \n"
-            "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar  \n"
+            "**📄 Dilekçe ve Dava Dosyası İncele**"
+            "Mevcut bir dilekçeyi, iddianameyi veya dava dosyasını yükleyerek hukuki denetim yapın ve cevap hazırlayın.\n"
+            "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder\n"
+            "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar\n"
             "✅ Emsal kararlarla güçlendirilmiş Cevap Dilekçesi (.docx) hazırlar"
         )
         if st.button(card_1_md, key="home_card_doc", width="stretch"):
@@ -883,10 +888,10 @@ if wizard_track == "HOME":
 
     with col_w2:
         card_2_md = (
-            "💬 Hukuk Asistanına Sor & Dilekçe Yaz\n\n"
-            "Dosya yüklemeden doğrudan hukuki sorularınıza yanıt alın, emsal karar arayın veya sıfırdan dilekçe yazdırın.\n\n"
-            "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap  \n"
-            "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama  \n"
+            "**💬 Hukuk Asistanına Sor & Dilekçe Yaz**"
+            "Dosya yüklemeden doğrudan hukuki sorularınıza yanıt alın, emsal karar arayın veya sıfırdan dilekçe yazdırın.\n"
+            "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap\n"
+            "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama\n"
             "✅ Olay özetinizden mahkemeye hazır resmi Word (.docx) dilekçe"
         )
         if st.button(card_2_md, key="home_card_ai", width="stretch"):
@@ -911,20 +916,19 @@ elif wizard_track == "DOC_FLOW":
             desc="Önce aşağıdaki iki karttan inceleme amacınıza tıklayın, ardından hemen altından dosyanızı seçin.",
         )
 
-        # 1. İnceleme Amacı: Tıpkı ilk sayfadaki gibi doğrudan tıklanabilir, eşit boyda ve hover hareketli 2 kart
+        # 1. İnceleme Amacı: Her iki kart da aynı parlaklıkta, başlık <strong> ile ayrı üst blokta
         mc1, mc2 = st.columns(2)
         is_mod_b = active_lawyer_mode == "MOD_B"
         is_mod_a = active_lawyer_mode == "MOD_A"
 
         with mc1:
             mod_b_md = (
-                f"🛡️ Karşı Tarafın Dilekçesi / İddianame {'  ✓' if is_mod_b else ''}\n\n"
+                f"**🛡️ Karşı Tarafın Dilekçesi / İddianame {'  (✅ SEÇİLİ)' if is_mod_b else ''}**"
                 "Karşı tarafın iddialarına itiraz etmek, hatalı Yargıtay karar atıflarını yakalamak ve güçlü bir Cevap / Savunma Dilekçesi hazırlamak istiyorum."
             )
             if st.button(
                 mod_b_md,
                 key="card_pick_mod_b",
-                type="primary" if is_mod_b else "secondary",
                 width="stretch",
             ):
                 st.session_state["active_lawyer_mode"] = "MOD_B"
@@ -932,13 +936,12 @@ elif wizard_track == "DOC_FLOW":
 
         with mc2:
             mod_a_md = (
-                f"✍️ Kendi Taslak Dilekçem {'  ✓' if is_mod_a else ''}\n\n"
+                f"**✍️ Kendi Taslak Dilekçem {'  (✅ SEÇİLİ)' if is_mod_a else ''}**"
                 "Kendi hazırladığım dilekçenin usul, dava şartı ve süre kontrollerini yapmak ve iddialarımı lehe Yargıtay kararlarıyla güçlendirmek istiyorum."
             )
             if st.button(
                 mod_a_md,
                 key="card_pick_mod_a",
-                type="primary" if is_mod_a else "secondary",
                 width="stretch",
             ):
                 st.session_state["active_lawyer_mode"] = "MOD_A"
