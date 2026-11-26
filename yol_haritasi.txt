@@ -352,4 +352,11 @@ BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
       imzalanabilecek standart `<template format_id="1.8">` `.udf` paketi olarak indirilmesi sağlandı.
     * `app.py` dosya yükleme alanına `.udf` desteği (`type=["udf", "docx", "pdf", "txt"]`) ve
       dilekçe indirme ekranlarına `"⚖️ UYAP Editör Formatında (.udf) İndir"` butonu eklendi.
+
+[✅ TAMAMLANDI] ADIM 22: Test İçin `ornek_dilekceler/` Klasöründe `.udf` ve `.docx` Formatlarında 6 Adet Gerçekçi Dilekçe Üretilmesi
+  - Yapılanlar:
+    * `ornek_dilekceler/` klasörüne İş Hukuku (`1_Is_Hukuku_Karsi_Taraf_Dava_Dilekcesi`),
+      Borçlar & Kira Hukuku (`2_Kira_Tespit_ve_Tahliye_Taslak_Dilekce`) ve Ceza Hukuku
+      (`3_Ceza_Savcilik_Sikayet_Dolandiricilik`) alanlarında hem UYAP `.udf` hem Word `.docx`
+      formatında toplam 6 adet test dilekçesi oluşturuldu ve doğrulandı.
 ================================================================================
