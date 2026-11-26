@@ -27,6 +27,8 @@ from __future__ import annotations
 import io
 import re
 import unicodedata
+import zipfile
+import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple, Any
@@ -269,7 +271,7 @@ def _normalize_law_code_token(raw_code: str) -> Tuple[str, Optional[str]]:
 # ---------------------------------------------------------------------------
 
 class LegalDocumentParser:
-    """Word (.docx), PDF (.pdf) ve düz metin (.txt) hukuki dilekçe ve dava dosyalarını ayrıştırır."""
+    """Word (.docx), UYAP Doküman Editörü (.udf), PDF (.pdf) ve düz metin (.txt) hukuki dilekçe ve dava dosyalarını ayrıştırır."""
 
     def parse_file(self, file_path_or_bytes: Any, filename: str = "dilekce.docx") -> ParsedLegalDocument:
         """Dosya yolundan veya bellek içi byte akışından dilekçeyi okur ve tam ayrıştırma yapar."""
@@ -279,6 +281,8 @@ class LegalDocumentParser:
             raw_text, page_count = self._read_pdf(file_path_or_bytes)
         elif ext in (".docx", ".doc"):
             raw_text, page_count = self._read_docx(file_path_or_bytes)
+        elif ext == ".udf":
+            raw_text, page_count = self._read_udf(file_path_or_bytes)
         else:
             if isinstance(file_path_or_bytes, (str, Path)) and Path(file_path_or_bytes).exists():
                 raw_text = Path(file_path_or_bytes).read_text(encoding="utf-8", errors="ignore")
@@ -401,6 +405,115 @@ class LegalDocumentParser:
                     chunks.append("\n")
 
         return "".join(chunks)
+
+    def _read_udf(self, source: Any) -> Tuple[str, int]:
+        """
+        UYAP Doküman Editörü (.udf) formatındaki dilekçe ve mahkeme/savcılık evraklarını okur.
+        UYAP .udf dosyaları teknik olarak içinde `content.xml` barındıran bir ZIP arşividir
+        (veya bazı dışa aktarımlarda doğrudan XML dosyasıdır).
+        `content.xml` içindeki `<content><![CDATA[...]]></content>` tam metin tamponunu ve
+        `<elements>` altındaki `<paragraph>` (`startOffset`, `length`) haritasını birlikte
+        çözümleyerek hiçbir harfi veya paragraf yapısını kaybetmeden çıkarır.
+        """
+        if isinstance(source, (str, Path)):
+            raw_bytes = Path(source).read_bytes()
+        elif isinstance(source, bytes):
+            raw_bytes = source
+        else:
+            raw_bytes = source.read()
+
+        xml_bytes = raw_bytes
+        if zipfile.is_zipfile(io.BytesIO(raw_bytes)):
+            with zipfile.ZipFile(io.BytesIO(raw_bytes), "r") as zf:
+                names = zf.namelist()
+                target_name = None
+                for candidate in names:
+                    if candidate.lower().endswith("content.xml"):
+                        target_name = candidate
+                        break
+                if target_name is None:
+                    for candidate in names:
+                        if candidate.lower().endswith(".xml"):
+                            target_name = candidate
+                            break
+                if target_name is not None:
+                    xml_bytes = zf.read(target_name)
+
+        xml_text = ""
+        for enc in ("utf-8", "utf-8-sig", "cp1254", "iso-8859-9", "latin1"):
+            try:
+                xml_text = xml_bytes.decode(enc)
+                break
+            except Exception:
+                continue
+        if not xml_text:
+            xml_text = xml_bytes.decode("utf-8", errors="ignore")
+
+        extracted_text = ""
+        try:
+            root = ET.fromstring(xml_text)
+            main_content_elem = root.find("content")
+            buffer_text = ""
+            if main_content_elem is not None and main_content_elem.text is not None:
+                buffer_text = main_content_elem.text
+
+            elements_node = root.find("elements")
+            if buffer_text and elements_node is not None:
+                para_list: List[str] = []
+                for p_elem in elements_node.iter("paragraph"):
+                    spans: List[str] = []
+                    for child in p_elem.iter():
+                        start_attr = child.attrib.get("startOffset")
+                        len_attr = child.attrib.get("length")
+                        if start_attr is not None and len_attr is not None:
+                            try:
+                                st_idx = int(start_attr)
+                                ln_val = int(len_attr)
+                                if st_idx >= 0 and ln_val > 0:
+                                    spans.append(buffer_text[st_idx : st_idx + ln_val])
+                            except ValueError:
+                                pass
+                    if spans:
+                        p_str = "".join(spans).replace("\r", "").strip()
+                        if p_str:
+                            para_list.append(p_str)
+
+                if para_list and sum(len(x) for x in para_list) >= int(len(buffer_text.strip()) * 0.7):
+                    extracted_text = "\n".join(para_list)
+                else:
+                    extracted_text = buffer_text
+            elif buffer_text:
+                extracted_text = buffer_text
+            else:
+                all_texts = [t.strip() for t in root.itertext() if t and t.strip()]
+                extracted_text = "\n".join(all_texts)
+        except Exception:
+            m_cdata = re.search(
+                r"<content>\s*<!\[CDATA\[(.*?)\]\]>\s*</content>",
+                xml_text,
+                flags=re.DOTALL | re.IGNORECASE,
+            )
+            if m_cdata:
+                extracted_text = m_cdata.group(1)
+            else:
+                m_plain = re.search(
+                    r"<content>(.*?)</content>",
+                    xml_text,
+                    flags=re.DOTALL | re.IGNORECASE,
+                )
+                if m_plain:
+                    extracted_text = m_plain.group(1)
+                else:
+                    extracted_text = re.sub(r"<[^>]+>", "\n", xml_text)
+
+        cleaned = (
+            extracted_text.replace("\r\n", "\n")
+            .replace("\r", "\n")
+            .replace("\u0000", "")
+            .strip()
+        )
+        est_pages = max(1, (len(cleaned) // 2800) + 1)
+        return cleaned, est_pages
 
     # -----------------------------------------------------------------------
     # 2. Ana Metin Ayrıştırma Boru Hattı (parse_text)

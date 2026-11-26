@@ -1029,19 +1029,19 @@ elif wizard_track == "DOC_FLOW":
             if is_mod_b:
                 st.markdown("#### 📥 Karşı Tarafın Dilekçesini veya İddianameyi Yükleyin")
                 st.caption(
-                    "Word (`.docx`), PDF (`.pdf`) veya Metin (`.txt`) formatındaki karşı taraf evrakını aşağıdaki alana sürükleyip bırakın. "
+                    "UYAP Doküman Editörü (`.udf`), Word (`.docx`), PDF (`.pdf`) veya Metin (`.txt`) formatındaki karşı taraf evrakını aşağıdaki alana sürükleyip bırakın. "
                     "Dosyanız yüklendiği anda sistem hatalı/uydurma Yargıtay kararlarını, usul eksiklerini ve itiraz noktalarını otomatik çıkaracaktır."
                 )
             else:
                 st.markdown("#### 📥 Kendi Hazırladığınız Taslak Dilekçeyi Yükleyin")
                 st.caption(
-                    "Word (`.docx`), PDF (`.pdf`) veya Metin (`.txt`) formatındaki taslak dilekçenizi aşağıdaki alana sürükleyip bırakın. "
+                    "UYAP Doküman Editörü (`.udf`), Word (`.docx`), PDF (`.pdf`) veya Metin (`.txt`) formatındaki taslak dilekçenizi aşağıdaki alana sürükleyip bırakın. "
                     "Dosyanız yüklendiği anda sistem görev, zamanaşımı, arabuluculuk şartlarını ve dilekçenizi güçlendirecek emsal Yargıtay kararlarını otomatik hazırlayacaktır."
                 )
 
             uploaded_file = st.file_uploader(
-                "Dilekçe veya dava dosyanızı seçin (.docx, .pdf, .txt):",
-                type=["docx", "pdf", "txt"],
+                "Dilekçe veya dava dosyanızı seçin (.udf, .docx, .pdf, .txt):",
+                type=["udf", "docx", "pdf", "txt"],
                 key="legal_doc_file_uploader",
                 label_visibility="collapsed",
             )
@@ -1554,11 +1554,11 @@ elif wizard_track == "DOC_FLOW":
             if gen_pkg is not None:
                 st.success(f"✅ **{gen_pkg.title}** hazırlandı.")
 
-                dl_c1, dl_c2 = st.columns(2)
+                dl_c1, dl_c2, dl_c3 = st.columns(3)
                 with dl_c1:
                     docx_petition_bytes = drafter.export_generated_petition_docx(gen_pkg)
                     st.download_button(
-                        label=":material/download: Resmi Dilekçeyi Word (.docx) Olarak İndir",
+                        label=":material/download: Resmi Dilekçeyi Word (.docx) İndir",
                         data=docx_petition_bytes,
                         file_name=f"Resmi_Dilekce_{safe_ref_token(gen_pkg.petition_type)}.docx",
                         mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -1566,8 +1566,18 @@ elif wizard_track == "DOC_FLOW":
                         width="stretch",
                     )
                 with dl_c2:
+                    udf_petition_bytes = drafter.export_generated_petition_udf(gen_pkg)
                     st.download_button(
-                        label=":material/description: Dilekçe Metnini (.txt) Olarak İndir",
+                        label=":material/gavel: UYAP Editör Formatında (.udf) İndir",
+                        data=udf_petition_bytes,
+                        file_name=f"Resmi_Dilekce_{safe_ref_token(gen_pkg.petition_type)}.udf",
+                        mime="application/octet-stream",
+                        type="primary",
+                        width="stretch",
+                    )
+                with dl_c3:
+                    st.download_button(
+                        label=":material/description: Dilekçe Metnini (.txt) İndir",
                         data=gen_pkg.full_petition_text.encode("utf-8"),
                         file_name=f"Resmi_Dilekce_{safe_ref_token(gen_pkg.petition_type)}.txt",
                         mime="text/plain",
@@ -1934,11 +1944,11 @@ elif wizard_track == "AI_FLOW":
             st.space("small")
             st.success(f"✅ **{gen_pkg_ai.title}** hazırlandı.")
 
-            dl_c1, dl_c2 = st.columns(2)
+            dl_c1, dl_c2, dl_c3 = st.columns(3)
             with dl_c1:
                 docx_petition_bytes = drafter.export_generated_petition_docx(gen_pkg_ai)
                 st.download_button(
-                    label=":material/download: Resmi Dilekçeyi Word (.docx) Olarak İndir",
+                    label=":material/download: Resmi Dilekçeyi Word (.docx) İndir",
                     data=docx_petition_bytes,
                     file_name=f"Resmi_Dilekce_{safe_ref_token(gen_pkg_ai.petition_type)}.docx",
                     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -1946,8 +1956,18 @@ elif wizard_track == "AI_FLOW":
                     width="stretch",
                 )
             with dl_c2:
+                udf_petition_bytes = drafter.export_generated_petition_udf(gen_pkg_ai)
                 st.download_button(
-                    label=":material/description: Dilekçe Metnini (.txt) Olarak İndir",
+                    label=":material/gavel: UYAP Editör Formatında (.udf) İndir",
+                    data=udf_petition_bytes,
+                    file_name=f"Resmi_Dilekce_{safe_ref_token(gen_pkg_ai.petition_type)}.udf",
+                    mime="application/octet-stream",
+                    type="primary",
+                    width="stretch",
+                )
+            with dl_c3:
+                st.download_button(
+                    label=":material/description: Dilekçe Metnini (.txt) İndir",
                     data=gen_pkg_ai.full_petition_text.encode("utf-8"),
                     file_name=f"Resmi_Dilekce_{safe_ref_token(gen_pkg_ai.petition_type)}.txt",
                     mime="text/plain",

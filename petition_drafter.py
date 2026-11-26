@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import io
 import re
+import zipfile
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 from typing import List, Dict, Optional, Tuple, Any
@@ -916,6 +917,93 @@ class PetitionDrafter:
         out_buf = io.BytesIO()
         document.save(out_buf)
         return out_buf.getvalue()
+
+    def export_generated_petition_udf(self, package: GeneratedPetitionPackage) -> bytes:
+        """
+        Üretilen `GeneratedPetitionPackage` içindeki resmi dilekçeyi doğrudan UYAP Doküman Editörü'nde
+        açılıp e-imza ile imzalanmaya hazır `.udf` (içinde `content.xml` bulunan ZIP paketi)
+        formatına dönüştürür.
+        """
+        raw_lines = [
+            ln.strip()
+            for ln in (package.full_petition_text or "").replace("\r\n", "\n").split("\n")
+            if ln.strip()
+        ]
+        if not raw_lines:
+            raw_lines = ["DİLEKÇE METNİ"]
+
+        full_buffer_parts: List[str] = []
+        para_xml_nodes: List[str] = []
+        cursor = 0
+
+        for idx, line_str in enumerate(raw_lines):
+            text_with_nl = line_str + "\n"
+            seg_len = len(text_with_nl)
+            full_buffer_parts.append(text_with_nl)
+
+            # UYAP Alignment: "0" = Sol, "1" = Orta, "2" = Sağ, "3" = İki Yana Yaslı (Justify)
+            alignment = "3"
+            is_bold = "false"
+
+            if idx == 0:
+                alignment = "1"
+                is_bold = "true"
+            elif re.match(
+                r"^(?:[IVX]+\.\s+|AÇIKLAMALAR|HUKUKİ\s+SEBEPLER|HUKUKİ\s+DELİLLER|SONUÇ\s+VE\s+İSTEM|NETİCE)",
+                line_str,
+            ):
+                alignment = "0"
+                is_bold = "true"
+            elif re.match(
+                r"^((?:DOSYA|SORUŞTURMA|DAVACI|DAVALI|MÜŞTEKİ|ŞÜPHELİ|SANIK|VEKİLİ|KONU)[^:]{0,25}:)\s*(.+)$",
+                line_str,
+            ):
+                alignment = "0"
+                is_bold = "false"
+            elif idx >= len(raw_lines) - 4 and (
+                "Vekili" in line_str or "Av." in line_str or "(e-imzalıdır)" in line_str
+            ):
+                alignment = "2"
+                is_bold = "true"
+
+            para_xml_nodes.append(
+                f'    <paragraph Alignment="{alignment}" LeftIndent="0.0" RightIndent="0.0" '
+                f'FirstLineIndent="0.0" LineSpacing="0.2">\n'
+                f'      <content startOffset="{cursor}" length="{seg_len}" '
+                f'family="Times New Roman" size="12" bold="{is_bold}" italic="false" />\n'
+                f'    </paragraph>'
+            )
+            cursor += seg_len
+
+        full_buffer = "".join(full_buffer_parts)
+        safe_cdata = full_buffer.replace("]]>", "]]]]><![CDATA[>")
+        paragraphs_block = "\n".join(para_xml_nodes)
+
+        content_xml = (
+            '<?xml version="1.0" encoding="UTF-8" ?>\n'
+            '<template format_id="1.8">\n'
+            f'<content><![CDATA[{safe_cdata}]]></content>\n'
+            '<properties>\n'
+            '  <pageFormat mediaSizeName="1" leftMargin="56.7" rightMargin="56.7" '
+            'topMargin="56.7" bottomMargin="56.7" paperOrientation="1" '
+            'headerFOffset="20.0" footerFOffset="20.0" />\n'
+            '</properties>\n'
+            '<elements resolver="hvl-default">\n'
+            f'{paragraphs_block}\n'
+            '</elements>\n'
+            '<styles>\n'
+            '  <style name="default" description="Geçerli" family="Times New Roman" '
+            'size="12" bold="false" italic="false" foreground="-13421773" '
+            'FONT_ATTRIBUTE_KEY="javax.swing.plaf.FontUIResource[family=Times New Roman,name=Times New Roman,style=plain,size=12]" />\n'
+            '  <style name="hvl-default" family="Times New Roman" size="12" description="Gövde" />\n'
+            '</styles>\n'
+            '</template>\n'
+        )
+
+        udf_buf = io.BytesIO()
+        with zipfile.ZipFile(udf_buf, mode="w", compression=zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr("content.xml", content_xml.encode("utf-8"))
+        return udf_buf.getvalue()
 
     # -----------------------------------------------------------------------
     # 5. KURAL E: Orijinal Dilekçe Metnine Dokunmadan Hakem Notlu Word (.docx)

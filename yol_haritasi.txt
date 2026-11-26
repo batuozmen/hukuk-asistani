@@ -340,4 +340,16 @@ BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
       kutularda yarı saydam yerine tam opak koyu lacivert (`#1E3A8A -> #0F172A`) gradyan
       zorunlu kılındı; böylece Windows veya tarayıcı Light Mode'a alınsa bile beyaz arka plan
       veya soluk mavi kart bozulması yaşanması %100 engellendi.
+
+[✅ TAMAMLANDI] ADIM 21: UYAP Doküman Editörü (`.udf`) Formatı Okuma ve Resmi `.udf` Dilekçe Üretim Desteği (`legal_parser.py`, `petition_drafter.py`, `app.py`)
+  - Yapılanlar:
+    * `legal_parser.py` içine `_read_udf()` metodu eklendi; hem ZIP arşivli (`content.xml`)
+      hem düz XML tabanlı UYAP `.udf` dosyalarında `<content><![CDATA[...]]></content>` tam metin
+      tamponu ve `<elements>` altındaki `<paragraph>` (`startOffset`, `length`) haritası
+      çözümlenerek Türkçe karakter ve paragraf kaybı olmadan ayrıştırma sağlandı.
+    * `petition_drafter.py` içine `export_generated_petition_udf()` metodu eklendi; sistemin
+      ürettiği resmi dilekçelerin doğrudan UYAP Doküman Editörü'nde açılıp e-imza ile
+      imzalanabilecek standart `<template format_id="1.8">` `.udf` paketi olarak indirilmesi sağlandı.
+    * `app.py` dosya yükleme alanına `.udf` desteği (`type=["udf", "docx", "pdf", "txt"]`) ve
+      dilekçe indirme ekranlarına `"⚖️ UYAP Editör Formatında (.udf) İndir"` butonu eklendi.
 ================================================================================
