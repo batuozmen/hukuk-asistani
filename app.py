@@ -93,6 +93,7 @@ hide_sidebar_css = (
     """
     section[data-testid="stSidebar"],
     div[data-testid="collapsedControl"],
+    div[data-testid="stSidebarCollapsedControl"],
     button[kind="headerNoPadding"] {
         display: none !important;
     }
@@ -108,9 +109,15 @@ hide_sidebar_css = (
         padding-top: 2.8rem !important;
         padding-bottom: 3.5rem !important;
     }
-    section[data-testid="stSidebar"] {
+    /* ÖNEMLİ: min-width YALNIZCA sidebar açıkken (aria-expanded="true") uygulanmalı!
+       Yoksa sidebar kapatıldığında (collapsed) yarısı ekranda asılı kalır ve '>>' oku ortaya kayar! */
+    section[data-testid="stSidebar"][aria-expanded="true"] {
         min-width: 280px !important;
         max-width: 300px !important;
+    }
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+        min-width: 0 !important;
+        width: 0 !important;
     }
     section[data-testid="stSidebar"] .block-container {
         padding-top: 1.3rem !important;
@@ -134,9 +141,9 @@ home_cards_css = (
         background: linear-gradient(155deg, rgba(30, 41, 59, 0.82) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
         border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
         border-radius: 18px !important;
-        padding: 1.9rem 1.85rem !important;
-        min-height: 335px !important;
-        height: 335px !important;
+        padding: 1.85rem 1.85rem !important;
+        min-height: 325px !important;
+        height: 325px !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
@@ -156,11 +163,11 @@ home_cards_css = (
         box-shadow: 0 18px 38px -8px rgba(37, 99, 235, 0.42) !important;
         background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
     }
-    /* Streamlit st.button içindeki div'i varsayılan olarak flex-row yaptığı için p'ler yan yana diziliyordu!
-       Bunu display: block !important yaparak her paragrafın %100 kendi satırında alt alta durmasını zorluyoruz! */
     .stButton > button > div,
     .stButton > button div[data-testid="stMarkdownContainer"] {
-        display: block !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
         width: 100% !important;
         text-align: left !important;
     }
@@ -168,34 +175,30 @@ home_cards_css = (
         display: block !important;
         width: 100% !important;
         text-align: left !important;
-        white-space: normal !important;
-        line-height: 1.55 !important;
+        white-space: pre-line !important;
+        line-height: 1.65 !important;
         font-size: 0.92rem !important;
         font-weight: 400 !important;
-        color: #E2E8F0 !important;
-        margin: 0 0 0.52rem 0 !important;
+        color: #CBD5E1 !important;
+        margin: 0 !important;
     }
-    .stButton > button p:first-of-type {
+    /* Başlığı <code> etiketiyle yakalayıp %100 tam satır kalın başlık ve alt çizgi yapıyoruz! */
+    .stButton > button p code {
         display: block !important;
         width: 100% !important;
+        background: transparent !important;
+        font-family: 'Inter', sans-serif !important;
         font-size: 1.24rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
+        border: none !important;
         border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
-        padding-bottom: 0.7rem !important;
-        margin-bottom: 0.8rem !important;
-    }
-    .stButton > button p:nth-of-type(2) {
-        display: block !important;
-        width: 100% !important;
-        color: #94A3B8 !important;
-        font-size: 0.91rem !important;
-        font-weight: 400 !important;
-        line-height: 1.48 !important;
-        margin-bottom: 0.85rem !important;
+        border-radius: 0 !important;
+        padding: 0 0 0.7rem 0 !important;
+        margin: 0 0 0.8rem 0 !important;
     }
     """
     if wizard_track == "HOME"
@@ -239,7 +242,9 @@ step1_cards_css = (
     }
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button > div,
     div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button div[data-testid="stMarkdownContainer"] {
-        display: block !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
         width: 100% !important;
         text-align: left !important;
     }
@@ -247,25 +252,30 @@ step1_cards_css = (
         display: block !important;
         width: 100% !important;
         text-align: left !important;
-        white-space: normal !important;
+        white-space: pre-line !important;
         line-height: 1.58 !important;
         font-size: 0.92rem !important;
         font-weight: 400 !important;
         color: #CBD5E1 !important;
         margin: 0 !important;
     }
-    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p:first-of-type {
+    /* Başlığı <code> etiketiyle yakalayıp %100 tam satır kalın başlık ve alt çizgi yapıyoruz! */
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p code {
         display: block !important;
         width: 100% !important;
+        background: transparent !important;
+        font-family: 'Inter', sans-serif !important;
         font-size: 1.16rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
+        border: none !important;
         border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
-        padding-bottom: 0.6rem !important;
-        margin-bottom: 0.72rem !important;
+        border-radius: 0 !important;
+        padding: 0 0 0.58rem 0 !important;
+        margin: 0 0 0.7rem 0 !important;
     }
     """
     if (wizard_track == "DOC_FLOW" and doc_step == 1)
@@ -883,10 +893,10 @@ if wizard_track == "HOME":
 
     with col_w1:
         card_1_md = (
-            "📄 Dilekçe ve Dava Dosyası İncele\n\n"
+            "`📄 Dilekçe ve Dava Dosyası İncele`\n"
             "Mevcut bir dilekçeyi, iddianameyi veya dava dosyasını yükleyerek hukuki denetim yapın ve cevap hazırlayın.\n\n"
-            "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder\n\n"
-            "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar\n\n"
+            "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder\n"
+            "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar\n"
             "✅ Emsal kararlarla güçlendirilmiş Cevap Dilekçesi (.docx) hazırlar"
         )
         if st.button(card_1_md, key="home_card_doc", width="stretch"):
@@ -894,10 +904,10 @@ if wizard_track == "HOME":
 
     with col_w2:
         card_2_md = (
-            "💬 Hukuk Asistanına Sor & Dilekçe Yaz\n\n"
+            "`💬 Hukuk Asistanına Sor & Dilekçe Yaz`\n"
             "Dosya yüklemeden doğrudan hukuki sorularınıza yanıt alın, emsal karar arayın veya sıfırdan dilekçe yazdırın.\n\n"
-            "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap\n\n"
-            "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama\n\n"
+            "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap\n"
+            "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama\n"
             "✅ Olay özetinizden mahkemeye hazır resmi Word (.docx) dilekçe"
         )
         if st.button(card_2_md, key="home_card_ai", width="stretch"):
@@ -929,7 +939,7 @@ elif wizard_track == "DOC_FLOW":
 
         with mc1:
             mod_b_md = (
-                "🛡️ Karşı Tarafın Dilekçesi / İddianame\n\n"
+                "`🛡️ Karşı Tarafın Dilekçesi / İddianame`\n"
                 "Karşı tarafın iddialarına itiraz etmek, hatalı Yargıtay karar atıflarını yakalamak ve güçlü bir Cevap / Savunma Dilekçesi hazırlamak istiyorum."
             )
             if st.button(
@@ -943,7 +953,7 @@ elif wizard_track == "DOC_FLOW":
 
         with mc2:
             mod_a_md = (
-                "✍️ Kendi Taslak Dilekçem\n\n"
+                "`✍️ Kendi Taslak Dilekçem`\n"
                 "Kendi hazırladığım dilekçenin usul, dava şartı ve süre kontrollerini yapmak ve iddialarımı lehe Yargıtay kararlarıyla güçlendirmek istiyorum."
             )
             if st.button(

@@ -318,4 +318,16 @@ BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
     * `Hazır Örnek Dilekçe ile Dene` sekmesi ve eski `segmented_control` barı tamamen kaldırıldı;
       yerine seçilen amaca göre dinamik açıklama sunan modern sürükle-bırak alanı ve altında
       `💾 Önceki Kayıtlı İncelemelerinizden Devam Edin` çekmecesi yerleştirildi.
+
+[✅ TAMAMLANDI] ADIM 19: Kart Başlığı Alt Satır Kesin Ayrımı (`p code` Block) ve Sol Menü Kapanmama / `>>` Ok Konumu Düzeltmesi (`app.py`)
+  - Yapılanlar:
+    * Streamlit `st.button` içindeki düz `\n\n` satır sonlarının tek `<p>` etiketinde birleşip
+      başlığın hemen yanına `"Mevcut..."` / `"Karşı tarafın..."` kelimesini yapıştırması sorunu,
+      başlıkların `` `Başlık` `` (`<code>` etiketi) içine alınması ve CSS'te `.stButton > button p code`
+      için `display: block !important; width: 100% !important; border-bottom: 1px solid ...`
+      tanımlanmasıyla %100 kesin olarak çözüldü.
+    * Sol yan menü (`stSidebar`) kapatıldığında `min-width: 280px !important` yüzünden menünün
+      yarısının ekranda asılı kalması ve `>>` açma okunun sayfa ortasına kayması hatası, genişlik
+      kuralının yalnızca `section[data-testid="stSidebar"][aria-expanded="true"]` durumuna
+      sınırlandırılmasıyla giderildi.
 ================================================================================
