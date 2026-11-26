@@ -162,15 +162,14 @@ home_cards_css = (
     }
     .stButton > button p {
         text-align: left !important;
-        white-space: pre-line !important;
-        line-height: 1.72 !important;
+        white-space: normal !important;
+        line-height: 1.68 !important;
         font-size: 0.93rem !important;
         font-weight: 400 !important;
         color: #E2E8F0 !important;
-        margin: 0 !important;
+        margin: 0 0 0.55rem 0 !important;
     }
-    .stButton > button p strong {
-        display: block !important;
+    .stButton > button p:first-child {
         font-size: 1.25rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
@@ -182,6 +181,13 @@ home_cards_css = (
         margin-bottom: 0.85rem !important;
         width: 100% !important;
     }
+    .stButton > button p:nth-child(2) {
+        color: #94A3B8 !important;
+        font-size: 0.92rem !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        margin-bottom: 0.95rem !important;
+    }
     """
     if wizard_track == "HOME"
     else ""
@@ -189,12 +195,12 @@ home_cards_css = (
 
 step1_cards_css = (
     """
-    .block-container .stButton > button {
-        background: linear-gradient(155deg, rgba(30, 41, 59, 0.82) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
-        border: 1.5px solid rgba(96, 165, 250, 0.36) !important;
+    /* ADIM 1: İnceleme Amacı Seçim Kartları — Ortak Kart Yapısı */
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button {
         border-radius: 16px !important;
         padding: 1.45rem 1.55rem !important;
         min-height: 185px !important;
+        height: 185px !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
@@ -206,37 +212,46 @@ step1_cards_css = (
                     box-shadow 0.22s ease,
                     background 0.22s ease !important;
         cursor: pointer !important;
-        box-shadow: 0 8px 22px -6px rgba(0, 0, 0, 0.32) !important;
     }
-    .block-container .stButton > button:hover {
+    /* Seçili Olmayan Kart (Sakin, temiz lacivert cam) */
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="secondary"] {
+        background: linear-gradient(155deg, rgba(30, 41, 59, 0.62) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
+        border: 1.5px solid rgba(148, 163, 184, 0.22) !important;
+        box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.28) !important;
+    }
+    /* Seçili Olan Kart (Zarifçe daha parlak mavi-lacivert ışıltı ve parlak kenarlık) */
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button[kind="primary"] {
+        background: linear-gradient(155deg, rgba(37, 99, 235, 0.28) 0%, rgba(30, 58, 138, 0.52) 100%) !important;
+        border: 2px solid #60A5FA !important;
+        box-shadow: 0 0 28px -4px rgba(59, 130, 246, 0.42), 0 10px 24px -6px rgba(15, 23, 42, 0.5) !important;
+    }
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button:hover {
         transform: translateY(-5px) !important;
-        border-color: #60A5FA !important;
-        box-shadow: 0 16px 34px -8px rgba(37, 99, 235, 0.42) !important;
-        background: linear-gradient(155deg, rgba(30, 58, 138, 0.48) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+        border-color: #93C5FD !important;
+        box-shadow: 0 14px 32px -6px rgba(59, 130, 246, 0.45) !important;
     }
-    .block-container .stButton > button div[data-testid="stMarkdownContainer"] {
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button div[data-testid="stMarkdownContainer"] {
         width: 100% !important;
         text-align: left !important;
     }
-    .block-container .stButton > button p {
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p {
         text-align: left !important;
-        white-space: pre-line !important;
+        white-space: normal !important;
         line-height: 1.58 !important;
         font-size: 0.92rem !important;
         font-weight: 400 !important;
         color: #CBD5E1 !important;
         margin: 0 !important;
     }
-    .block-container .stButton > button p strong {
-        display: block !important;
-        font-size: 1.15rem !important;
+    div[data-testid="stHorizontalBlock"]:first-of-type .stButton > button p:first-child {
+        font-size: 1.16rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         border-bottom: 1px solid rgba(148, 163, 184, 0.24) !important;
-        padding-bottom: 0.58rem !important;
+        padding-bottom: 0.6rem !important;
         margin-bottom: 0.72rem !important;
         width: 100% !important;
     }
@@ -856,10 +871,10 @@ if wizard_track == "HOME":
 
     with col_w1:
         card_1_md = (
-            "**📄 Dilekçe ve Dava Dosyası İncele**"
+            "📄 Dilekçe ve Dava Dosyası İncele\n\n"
             "Mevcut bir dilekçeyi, iddianameyi veya dava dosyasını yükleyerek hukuki denetim yapın ve cevap hazırlayın.\n\n"
-            "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder\n"
-            "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar\n"
+            "✅ Hatalı veya gerçek dışı Yargıtay karar atıflarını tespit eder  \n"
+            "✅ Usul, dava şartı, zamanaşımı ve arabuluculuk kontrolü yapar  \n"
             "✅ Emsal kararlarla güçlendirilmiş Cevap Dilekçesi (.docx) hazırlar"
         )
         if st.button(card_1_md, key="home_card_doc", width="stretch"):
@@ -867,10 +882,10 @@ if wizard_track == "HOME":
 
     with col_w2:
         card_2_md = (
-            "**💬 Hukuk Asistanına Sor & Dilekçe Yaz**"
+            "💬 Hukuk Asistanına Sor & Dilekçe Yaz\n\n"
             "Dosya yüklemeden doğrudan hukuki sorularınıza yanıt alın, emsal karar arayın veya sıfırdan dilekçe yazdırın.\n\n"
-            "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap\n"
-            "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama\n"
+            "✅ Kanun maddesi ve Yargıtay karar numaralı hukuki soru-cevap  \n"
+            "✅ Uyuşmazlık konusuna uygun Yargıtay ve Danıştay kararı arama  \n"
             "✅ Olay özetinizden mahkemeye hazır resmi Word (.docx) dilekçe"
         )
         if st.button(card_2_md, key="home_card_ai", width="stretch"):
@@ -886,28 +901,29 @@ elif wizard_track == "DOC_FLOW":
     saved_files = sorted(SESSIONS_DIR.glob("*.analiz.json"), key=lambda p: p.stat().st_mtime, reverse=True)
 
     # -----------------------------------------------------------------------
-    # SİHİRBAZ ADIM 1: AMACINI SEÇ VE DOSYANI YÜKLE (DOĞRUDAN TIKLANABİLİR 2 HOVER KART)
+    # SİHİRBAZ ADIM 1: AMACINI SEÇ VE DOSYANI YÜKLE (SEÇİLEN KART ZARİFÇE PARLAR, HAZIR ÖRNEK KALDIRILDI)
     # -----------------------------------------------------------------------
     if doc_step == 1:
         render_guide_banner(
             step_badge="⚖️ DİLEKÇE & DAVA DOSYASI İNCELEME",
             title="📤 İnceleme Amacınızı Seçin ve Dosyanızı Yükleyin",
-            desc="Önce aşağıdaki iki karttan inceleme amacınıza tıklayın, ardından hemen altından dosyanızı seçin.",
+            desc="Önce aşağıdaki iki karttan inceleme amacınıza tıklayın, ardından hemen altından dosyanızı yükleyin.",
         )
 
-        # 1. İnceleme Amacı: Her iki kart da aynı parlaklıkta, başlık <strong> ile ayrı üst blokta
+        # 1. İnceleme Amacı: Seçilen kart primary olarak daha parlak mavi ışıltı alır, 'SEÇİLİ' yazmaz ve '**' görünmez!
         mc1, mc2 = st.columns(2)
         is_mod_b = active_lawyer_mode == "MOD_B"
         is_mod_a = active_lawyer_mode == "MOD_A"
 
         with mc1:
             mod_b_md = (
-                f"**🛡️ Karşı Tarafın Dilekçesi / İddianame {'  (✅ SEÇİLİ)' if is_mod_b else ''}**"
+                "🛡️ Karşı Tarafın Dilekçesi / İddianame\n\n"
                 "Karşı tarafın iddialarına itiraz etmek, hatalı Yargıtay karar atıflarını yakalamak ve güçlü bir Cevap / Savunma Dilekçesi hazırlamak istiyorum."
             )
             if st.button(
                 mod_b_md,
                 key="card_pick_mod_b",
+                type="primary" if is_mod_b else "secondary",
                 width="stretch",
             ):
                 st.session_state["active_lawyer_mode"] = "MOD_B"
@@ -915,12 +931,13 @@ elif wizard_track == "DOC_FLOW":
 
         with mc2:
             mod_a_md = (
-                f"**✍️ Kendi Taslak Dilekçem {'  (✅ SEÇİLİ)' if is_mod_a else ''}**"
+                "✍️ Kendi Taslak Dilekçem\n\n"
                 "Kendi hazırladığım dilekçenin usul, dava şartı ve süre kontrollerini yapmak ve iddialarımı lehe Yargıtay kararlarıyla güçlendirmek istiyorum."
             )
             if st.button(
                 mod_a_md,
                 key="card_pick_mod_a",
+                type="primary" if is_mod_a else "secondary",
                 width="stretch",
             ):
                 st.session_state["active_lawyer_mode"] = "MOD_A"
@@ -928,44 +945,33 @@ elif wizard_track == "DOC_FLOW":
 
         st.space("small")
 
-        # 2. Dosya Seçim Kartı
-        with st.container(border=True):
-            st.markdown("##### 📁 Dilekçe veya Dava Dosyanızı Seçin")
-            cur_mk_default = st.session_state.get("active_entry_mode", "upload")
-            opt_upload = "📄 Bilgisayarımdan Dosya Yükle (.docx / .pdf / .txt)"
-            opt_saved = f"💾 Kayıtlı İncelemeler ({len(saved_files)})"
-            opt_demo = "🧪 Hazır Örnek Dilekçe ile Dene"
-            default_entry_opt = (
-                opt_saved if cur_mk_default == "saved" else (opt_demo if cur_mk_default == "demo" else opt_upload)
-            )
+        # 2. Modern, Akıcı ve Açıklayıcı Dosya Yükleme Alanı (Hazır Örnek Kısmı Tamamen Kaldırıldı)
+        parser = get_parser()
+        st.session_state["active_entry_mode"] = "upload"
 
-            entry_mode = st.segmented_control(
-                "Dosya Giriş Yöntemi:",
-                options=[opt_upload, opt_saved, opt_demo],
-                default=default_entry_opt,
+        with st.container(border=True):
+            if is_mod_b:
+                st.markdown("#### 📥 Karşı Tarafın Dilekçesini veya İddianameyi Yükleyin")
+                st.caption(
+                    "Word (`.docx`), PDF (`.pdf`) veya Metin (`.txt`) formatındaki karşı taraf evrakını aşağıdaki alana sürükleyip bırakın. "
+                    "Dosyanız yüklendiği anda sistem hatalı/uydurma Yargıtay kararlarını, usul eksiklerini ve itiraz noktalarını otomatik çıkaracaktır."
+                )
+            else:
+                st.markdown("#### 📥 Kendi Hazırladığınız Taslak Dilekçeyi Yükleyin")
+                st.caption(
+                    "Word (`.docx`), PDF (`.pdf`) veya Metin (`.txt`) formatındaki taslak dilekçenizi aşağıdaki alana sürükleyip bırakın. "
+                    "Dosyanız yüklendiği anda sistem görev, zamanaşımı, arabuluculuk şartlarını ve dilekçenizi güçlendirecek emsal Yargıtay kararlarını otomatik hazırlayacaktır."
+                )
+
+            uploaded_file = st.file_uploader(
+                "Dilekçe veya dava dosyanızı seçin (.docx, .pdf, .txt):",
+                type=["docx", "pdf", "txt"],
+                key="legal_doc_file_uploader",
                 label_visibility="collapsed",
             )
 
-            if entry_mode and entry_mode.startswith("💾"):
-                cur_mode_key = "saved"
-            elif entry_mode and entry_mode.startswith("🧪"):
-                cur_mode_key = "demo"
-            else:
-                cur_mode_key = "upload"
-
-            prev_mode_key = st.session_state.get("active_entry_mode")
-            if prev_mode_key != cur_mode_key:
-                if prev_mode_key is not None and "selected_claim_indices" in st.session_state:
-                    st.session_state[f"sel_{prev_mode_key}"] = set(st.session_state["selected_claim_indices"])
-                if f"sel_{cur_mode_key}" in st.session_state:
-                    st.session_state["selected_claim_indices"] = set(st.session_state[f"sel_{cur_mode_key}"])
-                st.session_state["editor_ver"] = st.session_state.get("editor_ver", 0) + 1
-                st.session_state["active_entry_mode"] = cur_mode_key
-
-            parser = get_parser()
-            uploaded_file = None
-
-            if cur_mode_key == "saved":
+            # Eğer daha önce kaydedilmiş incelemeler varsa veya .json yedeği yüklemek isterse temiz çekmece
+            with st.expander(f"💾 Önceki Kayıtlı İncelemelerinizden Devam Edin ({len(saved_files)} Kayıt)", expanded=False):
                 col_s1, col_s2 = st.columns([1.4, 1.0], vertical_alignment="bottom")
                 with col_s1:
                     if saved_files:
@@ -1004,13 +1010,14 @@ elif wizard_track == "DOC_FLOW":
                                     notice_msg="",
                                     target_mode="saved",
                                 )
+                                st.session_state["active_entry_mode"] = "saved"
                                 start_doc_flow(step=3 if v_res else 2)
                     else:
-                        st.caption("Henüz kaydedilmiş bir inceleme bulunmuyor.")
+                        st.caption("Bilgisayarınızda henüz kaydedilmiş bir inceleme bulunmuyor.")
 
                 with col_s2:
                     uploaded_json = st.file_uploader(
-                        "Veya `.analiz.json` dosyasını yükleyin:",
+                        "Veya `.analiz.json` çalışma kaydını yükleyin:",
                         type=["json"],
                         key="legal_session_json_uploader",
                     )
@@ -1032,86 +1039,40 @@ elif wizard_track == "DOC_FLOW":
                                     notice_msg="",
                                     target_mode="saved",
                                 )
+                                st.session_state["active_entry_mode"] = "saved"
                                 start_doc_flow(step=3 if v_res else 2)
                             except Exception as exc:
                                 st.error(f"Dosya okunamadı: {exc}")
                     else:
                         st.session_state.pop("last_uploaded_legal_json_sig", None)
 
-            elif cur_mode_key == "demo":
-                demo_options = {v["title"]: k for k, v in DEMO_PETITIONS.items()}
-                dc1, dc2 = st.columns([2.8, 1.3], vertical_alignment="bottom")
-                with dc1:
-                    chosen_demo_title = st.selectbox(
-                        "Örnek dilekçe seçin:",
-                        options=list(demo_options.keys()),
-                    )
-                with dc2:
-                    if st.button(":material/play_arrow: Örneği Yükle ve Devam Et ➡️", type="primary", width="stretch"):
-                        d_key = demo_options[chosen_demo_title]
-                        d_info = DEMO_PETITIONS[d_key]
-                        p_demo = parser.parse_text(d_info["text"], filename=d_info["filename"])
-                        st.session_state["active_lawyer_mode"] = d_info.get("recommended_mode", "MOD_B")
-                        _save_mode_state(
-                            mode_key="demo",
-                            parsed_doc=p_demo,
-                            cited_map={},
-                            claim_precs_map={},
-                            statutes_map={},
-                            verification_results=[],
-                            notice_msg="",
-                            selected_indices=set(range(1, len(p_demo.claims) + 1)),
+        if uploaded_file is not None:
+            up_sig = f"{uploaded_file.name}_{uploaded_file.size}"
+            if st.session_state.get("last_uploaded_legal_doc_sig") != up_sig:
+                st.session_state["last_uploaded_legal_doc_sig"] = up_sig
+                docx_b = uploaded_file.getvalue() if uploaded_file.name.lower().endswith(".docx") else None
+                if docx_b:
+                    st.session_state["docx_bytes_upload"] = docx_b
+                else:
+                    st.session_state.pop("docx_bytes_upload", None)
+
+                auto_file = _session_file_for_doc(uploaded_file.name)
+                if auto_file.exists():
+                    try:
+                        p_doc, c_map, cp_map, s_map, v_res, l_mode, s_at = deserialize_legal_session_bytes(
+                            auto_file.read_bytes()
                         )
-                        st.session_state["selected_claim_indices"] = set(range(1, len(p_demo.claims) + 1))
-                        st.session_state["editor_ver"] = st.session_state.get("editor_ver", 0) + 1
-                        start_doc_flow(step=2)
-
-            else:
-                uploaded_file = st.file_uploader(
-                    "Word (.docx), PDF (.pdf) veya Metin (.txt) dosyanızı buraya bırakın:",
-                    type=["docx", "pdf", "txt"],
-                    key="legal_doc_file_uploader",
-                )
-
-        if cur_mode_key == "upload":
-            if uploaded_file is not None:
-                up_sig = f"{uploaded_file.name}_{uploaded_file.size}"
-                if st.session_state.get("last_uploaded_legal_doc_sig") != up_sig:
-                    st.session_state["last_uploaded_legal_doc_sig"] = up_sig
-                    docx_b = uploaded_file.getvalue() if uploaded_file.name.lower().endswith(".docx") else None
-                    if docx_b:
-                        st.session_state["docx_bytes_upload"] = docx_b
-                    else:
-                        st.session_state.pop("docx_bytes_upload", None)
-
-                    auto_file = _session_file_for_doc(uploaded_file.name)
-                    if auto_file.exists():
-                        try:
-                            p_doc, c_map, cp_map, s_map, v_res, l_mode, s_at = deserialize_legal_session_bytes(
-                                auto_file.read_bytes()
-                            )
-                            activate_loaded_session(
-                                parsed_doc=p_doc,
-                                cited_map=c_map,
-                                claim_precs_map=cp_map,
-                                statutes_map=s_map,
-                                verification_results=v_res,
-                                notice_msg="",
-                                target_mode="upload",
-                            )
-                            start_doc_flow(step=3 if v_res else 2)
-                        except Exception:
-                            p_new = parser.parse_file(uploaded_file.getvalue(), filename=uploaded_file.name)
-                            _save_mode_state(
-                                mode_key="upload",
-                                parsed_doc=p_new,
-                                docx_bytes=docx_b,
-                                selected_indices=set(range(1, len(p_new.claims) + 1)),
-                            )
-                            st.session_state["selected_claim_indices"] = set(range(1, len(p_new.claims) + 1))
-                            st.session_state["editor_ver"] = st.session_state.get("editor_ver", 0) + 1
-                            start_doc_flow(step=2)
-                    else:
+                        activate_loaded_session(
+                            parsed_doc=p_doc,
+                            cited_map=c_map,
+                            claim_precs_map=cp_map,
+                            statutes_map=s_map,
+                            verification_results=v_res,
+                            notice_msg="",
+                            target_mode="upload",
+                        )
+                        start_doc_flow(step=3 if v_res else 2)
+                    except Exception:
                         p_new = parser.parse_file(uploaded_file.getvalue(), filename=uploaded_file.name)
                         _save_mode_state(
                             mode_key="upload",
@@ -1122,8 +1083,19 @@ elif wizard_track == "DOC_FLOW":
                         st.session_state["selected_claim_indices"] = set(range(1, len(p_new.claims) + 1))
                         st.session_state["editor_ver"] = st.session_state.get("editor_ver", 0) + 1
                         start_doc_flow(step=2)
-            else:
-                st.session_state.pop("last_uploaded_legal_doc_sig", None)
+                else:
+                    p_new = parser.parse_file(uploaded_file.getvalue(), filename=uploaded_file.name)
+                    _save_mode_state(
+                        mode_key="upload",
+                        parsed_doc=p_new,
+                        docx_bytes=docx_b,
+                        selected_indices=set(range(1, len(p_new.claims) + 1)),
+                    )
+                    st.session_state["selected_claim_indices"] = set(range(1, len(p_new.claims) + 1))
+                    st.session_state["editor_ver"] = st.session_state.get("editor_ver", 0) + 1
+                    start_doc_flow(step=2)
+        else:
+            st.session_state.pop("last_uploaded_legal_doc_sig", None)
 
     # -----------------------------------------------------------------------
     # SİHİRBAZ ADIM 2: USUL KONTROLÜ & İDDİA BENTLERİNİ DENETLE

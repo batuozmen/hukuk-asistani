@@ -3,7 +3,7 @@ YAPAY ZEKA DESTEKLİ HUKUKİ DİLEKÇE, DAVA DOSYASI, İÇTİHAT (EMSAL KARAR)
 DOĞRULAMA, STRATEJİ VE SIFIR HALÜSİNASYONLU DİLEKÇE YAZIM SİSTEMİ
 MASTER TEKNİK MİMARİ RAPORU, KESİN KURALLAR VE YOL HARİTASI (hukuk_asistani)
 ================================================================================
-Son Güncelleme: 26.11.2026 - ADIM 17 Tamamlandı (Kartlarda Başlık-Açıklama Yapışması ve Parlaklık Farkı Düzeltildi, GitHub'a Push Edildi)
+Son Güncelleme: 26.11.2026 - ADIM 18 Tamamlandı (Seçili Kart Parlama Işıltısı, `**` Hatasının Giderilmesi, Hazır Örnek Sekmesinin Kaldırılması ve Modern Yükleme Kartı)
 
 --------------------------------------------------------------------------------
 BÖLÜM 0: YAPAY ZEKA ASİSTANI İÇİN KESİN VE ZORUNLU ÇALIŞMA KURALLARI (İHLAL EDİLEMEZ!)
@@ -308,4 +308,14 @@ BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
       dengesizliği kaldırılarak her iki kart da aynı standart parlaklığa ve `✅ SEÇİLİ` etiketine kavuşturuldu.
     * Dosya yükleme sekmelerindeki (`segmented_control`) koyu mavi okunaksız yazı parlak beyaza
       çevrildi ve sol menüdeki çift `st.divider()` çizgisi temizlendi.
+
+[✅ TAMAMLANDI] ADIM 18: Seçili Kartın Parlama Işıltısı, `\n\n` Başlık Ayrımı, Hazır Örnek Sekmesinin Kaldırılması ve Akıcı Yükleme Kartı (`app.py`)
+  - Yapılanlar:
+    * Kart başlıklarındaki `**` işaretlerinin görünmesine yol açan bitişik yazım kaldırılarak
+      `Başlık\n\nAçıklama` (`p:first-child` kalın başlık + `p:nth-child(2)` alt satır açıklama) yapısına geçildi.
+    * `(✅ SEÇİLİ)` yazısı kaldırıldı; seçilen kartın diğerine göre daha aydınlık mavi-lacivert
+      iç ışıltı ve parlak kenarlıkla (`box-shadow` glow) parlaması sağlandı.
+    * `Hazır Örnek Dilekçe ile Dene` sekmesi ve eski `segmented_control` barı tamamen kaldırıldı;
+      yerine seçilen amaca göre dinamik açıklama sunan modern sürükle-bırak alanı ve altında
+      `💾 Önceki Kayıtlı İncelemelerinizden Devam Edin` çekmecesi yerleştirildi.
 ================================================================================
