@@ -307,6 +307,55 @@ st.html(
         transform: translateY(-2px) !important;
     }}
 
+    /* ADIM 16: Tüm Sayfalardaki Çerçeveli Kartlar, Metrik Kutuları ve Expanderlar İçin Hover & Glassmorphism */
+    div[data-testid="stVerticalBlockBorderWrapper"] {{
+        background: linear-gradient(155deg, rgba(30, 41, 59, 0.58) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
+        border: 1px solid rgba(96, 165, 250, 0.24) !important;
+        border-radius: 14px !important;
+        transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease !important;
+    }}
+    div[data-testid="stVerticalBlockBorderWrapper"]:hover {{
+        border-color: rgba(96, 165, 250, 0.55) !important;
+        box-shadow: 0 10px 26px -8px rgba(37, 99, 235, 0.25) !important;
+    }}
+
+    /* Metrik Kutuları (Adım 2 ve Adım 3 Sayaçları) */
+    div[data-testid="stMetric"] {{
+        padding: 0.25rem 0.2rem !important;
+    }}
+    div[data-testid="stMetricValue"] {{
+        font-weight: 800 !important;
+        color: #F8FAFC !important;
+    }}
+
+    /* Örnek Hukuk Sorusu Kart Butonları ve İndirme/Geçiş Butonları Hover Efekti */
+    .block-container .stButton > button,
+    .block-container .stDownloadButton > button {{
+        border-radius: 11px !important;
+        font-weight: 600 !important;
+        transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+                    border-color 0.18s ease,
+                    box-shadow 0.18s ease !important;
+    }}
+    .block-container .stButton > button:hover,
+    .block-container .stDownloadButton > button:hover {{
+        transform: translateY(-3px) !important;
+        box-shadow: 0 10px 22px -6px rgba(37, 99, 235, 0.35) !important;
+    }}
+
+    /* Emsal Karar Sonuç Kartı Başlığı */
+    .precedent-card-header {{
+        font-size: 1.08rem;
+        font-weight: 800;
+        color: #FFFFFF;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+        padding-bottom: 0.45rem;
+        margin-bottom: 0.55rem;
+    }}
+
     /* Sol Menü Marka Kartı */
     .sidebar-brand-card {{
         background: linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%);
@@ -1783,7 +1832,9 @@ elif wizard_track == "AI_FLOW":
             st.markdown(f"#### 🏛️ Bulunan Emsal Kararlar ({len(free_precs)})")
             for idx_fp, fp in enumerate(free_precs, start=1):
                 with st.container(border=True):
-                    st.markdown(f"**{idx_fp}. {fp.citation_label}**")
+                    st.html(
+                        f'<div class="precedent-card-header">🏛️ {idx_fp}. {fp.citation_label}</div>'
+                    )
                     st.markdown(f"**📌 Karar Özeti:**  \n{fp.summary_principle}")
                     with st.expander("Kararın Tam Metnini ve Dilekçe Alıntı Şablonunu Gör"):
                         st.write(fp.full_text)

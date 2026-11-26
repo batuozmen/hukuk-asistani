@@ -3,7 +3,7 @@ YAPAY ZEKA DESTEKLİ HUKUKİ DİLEKÇE, DAVA DOSYASI, İÇTİHAT (EMSAL KARAR)
 DOĞRULAMA, STRATEJİ VE SIFIR HALÜSİNASYONLU DİLEKÇE YAZIM SİSTEMİ
 MASTER TEKNİK MİMARİ RAPORU, KESİN KURALLAR VE YOL HARİTASI (hukuk_asistani)
 ================================================================================
-Son Güncelleme: 26.11.2026 - ADIM 15 Tamamlandı (Git & GitHub `hukuk-asistani` Reposu Kuruldu ve Tüm Dosyalar Yedeklendi)
+Son Güncelleme: 26.11.2026 - ADIM 16 Tamamlandı (Tüm İnceleme, Sohbet ve Emsal Karar Sayfaları Hover Kartlarla Modernleştirildi ve GitHub'a Push Edildi)
 
 --------------------------------------------------------------------------------
 BÖLÜM 0: YAPAY ZEKA ASİSTANI İÇİN KESİN VE ZORUNLU ÇALIŞMA KURALLARI (İHLAL EDİLEMEZ!)
@@ -291,4 +291,11 @@ BÖLÜM 3: ADIM ADIM GELİŞTİRME PLANI VE MODÜL DETAYLARI
       tutulmadan tüm modüller, yapılandırmalar, `.cache`, `raporlar` ve `yol_haritasi.txt`
       GitHub (`hukuk-asistani`) reposuna push edildi.
     * BÖLÜM 0 kurallarına her adımda otomatik GitHub `commit & push` zorunluluğu eklendi.
+
+[✅ TAMAMLANDI] ADIM 16: Diğer Sayfaların (`Adım 2-5` ve `Hukuk Asistanı Sohbet / Emsal Arama`) Hover Kartlarla Modernleştirilmesi (`app.py`)
+  - Yapılanlar:
+    * Tüm sayfalardaki çerçeveli bilgi kutuları, metrik kartları, örnek soru butonları ve
+      indirme/geçiş butonlarına cam efekti (glassmorphism) ve hover hareket animasyonu eklendi.
+    * Emsal karar sonuç kartları tek satır kalın künye başlığı (`.precedent-card-header`) ile
+      kurumsal formata kavuşturuldu ve değişiklikler GitHub (`hukuk-asistani`) reposuna push edildi.
 ================================================================================
